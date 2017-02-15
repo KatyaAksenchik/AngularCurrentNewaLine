@@ -1,0 +1,108 @@
+<div class="wrapper">
+    <h2 class="registration-place">Регистрация</h2>
+    <!--<form (ngSubmit)="onSubmit()"  #registrationForm="ngForm">-->
+        <!--<div class="registration-field-box">-->
+            <!--<label>Логин*</label>-->
+            <!--<input type="text" required placeholder="Логин" name="login" [(ngModel)]="newUser.login" #login="ngModel"-->
+                    <!--forbiddenName="checkLogin()" (keyup)="checkLogin() == false ? loginValid = false : loginValid= true">-->
+            <!--<div [hidden]="loginValid || login.pristine" class="warning-style">-->
+                <!--Такой логин уже существует-->
+            <!--</div>-->
+            <!--<div *ngIf="formErrors.login" class="warning-style">-->
+                <!--{{ formErrors.login }}-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+        <!--<div class="registration-field-box">-->
+            <!--<label>Пароль*</label>-->
+            <!--<input type="password" placeholder="Пароль" required name="password" [(ngModel)]="newUser.password"-->
+                   <!--#password="ngModel" minlength="3">-->
+            <!--<div *ngIf="formErrors.password" class="warning-style">-->
+                <!--{{ formErrors.password }}-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="registration-field-box">-->
+            <!--<label>Электронная почта*</label>-->
+            <!--<input type="email" placeholder="Электронная почта" required-->
+                   <!--pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"-->
+                   <!--name="email" [(ngModel)]="newUser.email" #email="ngModel">-->
+            <!--<div [hidden]="email.valid || email.pristine" class="warning-style">-->
+                <!--Электронная почта должна соответствовать example@example.com-->
+            <!--</div>-->
+            <!--<div *ngIf="formErrors.email" class="warning-style">-->
+                <!--{{ formErrors.password }}-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<hr class="form-divider">-->
+        <!--<div class="registration-field-box">-->
+            <!--<label>Имя и Фамилия</label>-->
+            <!--<input type="text" placeholder="Имя Фамилия" name="userName" [(ngModel)]="newUser.userName" #userName="ngModel">-->
+        <!--</div>-->
+        <!--<div class="registration-field-box" >-->
+            <!--<label>Дата рождения</label>-->
+            <!--<input type="date" name="birthday" placeholder="dd/mm/yyyy" [(ngModel)]="newUser.birthday" #birthday="ngModel">-->
+        <!--</div>-->
+        <!--<div class="registration-field-box">-->
+            <!--<label>Телефон</label>-->
+            <!--<input type="text" placeholder="Телефон"name="phoneNumber" pattern="^(\d{9})$"-->
+                   <!--[(ngModel)]="newUser.phoneNumber" #phoneNumber="ngModel">-->
+            <!--<div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="warning-style">-->
+                <!--Телефон должен состоять из 9 цифр-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="registration-place">-->
+            <!--<button type="submit" class="btn-styles"  [disabled]="!registrationForm.form.valid">-->
+                <!--Зарегистрироваться-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</form>-->
+
+
+    <form  [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="registration-field-box">
+            <label>Логин*</label>
+            <input type="text" placeholder="Логин" required id="login" formControlName="login">
+            <div *ngIf="formErrors.login" class="warning-style">
+                {{ formErrors.login }}
+            </div>
+        </div>
+
+        <div class="registration-field-box">
+            <label>Пароль*</label>
+            <input type="password" required placeholder="Пароль" id="password" formControlName="password">
+            <div *ngIf="formErrors.password" class="warning-style">
+                {{ formErrors.password }}
+            </div>
+        </div>
+        <div class="registration-field-box">
+            <label>Электронная почта*</label>
+            <input type="email" required placeholder="Электронная почта" id="email" formControlName="email">
+            <div *ngIf="formErrors.email" class="warning-style">
+                {{ formErrors.email }}
+            </div>
+        </div>
+        <hr class="form-divider">
+        <div class="registration-field-box">
+            <label>Имя и Фамилия</label>
+            <input type="text" placeholder="Имя Фамилия" id="userName" formControlName="userName">
+        </div>
+        <div class="registration-field-box" >
+            <label>Дата рождения</label>
+            <input type="date" formControlName="birthday" id="birthday">
+        </div>
+        <div class="registration-field-box">
+            <label>Телефон</label>
+            <input type="text" placeholder="Телефон" id="phoneNumber" formControlName="phoneNumber">
+            <div *ngIf="formErrors.phoneNumber" class="warning-style">
+                {{ formErrors.phoneNumber }}
+            </div>
+        </div>
+        <div class="registration-place">
+            <button type="submit" class="btn-styles" [disabled]="registrationForm.invalid">
+                Зарегистрироваться
+            </button>
+        </div>
+    </form>
+</div>
