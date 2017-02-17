@@ -1,0 +1,17 @@
+<div class="editor-news-box">
+    <div>
+        <div class="editor-news-inner-padding">
+            <img src={{article.imgUrl}} alt="{{article.articleName}}" width="227" height="142">
+            <h3>{{article.articleName}}</h3>
+        </div>
+        <div class="tool-bar">
+                    <span class="news-current-mode {{article.published ? 'news-published-mode': 'news-edit-mode'}}">
+                        {{ article.published ? "Опубликованно" : "Редактируется" }}
+                    </span>
+            <i class="fa fa-globe fa-1x" aria-hidden="true" (click)="onPublishArticle()"></i>
+            <i class="fa fa-desktop fa-1x" aria-hidden="true"></i>
+            <i class="fa fa-pencil fa-1x" aria-hidden="true" (click)="onEditArticle()"></i>
+            <i class="fa fa-trash fa-1x" aria-hidden="true" (click)="onDelete()"></i>
+        </div>
+    </div>
+</div>

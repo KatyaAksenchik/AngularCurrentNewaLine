@@ -1,9 +1,8 @@
-/**
- * Created by Katsiaryna on 9/02/2017.
- */
 
 export class Article{
-    constructor( public articleName: string,
+    constructor( 
+                 public id: number,
+                 public articleName: string,
                  public imgUrl: string,
                  public articleText: string,
                  public authorName: string,

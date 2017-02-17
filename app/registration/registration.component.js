@@ -15,7 +15,7 @@ var data_1 = require("../shared/data");
 var RegistrationComponent = (function () {
     function RegistrationComponent(formBuilder) {
         this.formBuilder = formBuilder;
-        this.users = data_1.users;
+        // users = users;
         //     index=0;
         //     newUser: User = new User("", "", "");
         //
@@ -148,12 +148,12 @@ var RegistrationComponent = (function () {
         //                 else return {notExistedLogin: true};
         //             }
         //     }
+        this.users = data_1.users;
         this.newUser = new user_1.User("", "", "");
         this.formErrors = {
             'login': '',
             'password': '',
-            'email': '',
-            'phoneNumber': ''
+            'email': ''
         };
         this.validationMessages = {
             'login': {
@@ -167,28 +167,28 @@ var RegistrationComponent = (function () {
             'email': {
                 'required': 'Email обязателен для заполнения',
                 'pattern': 'Email должен подходить под маску example@example.com'
-            },
-            'phoneNumber': {
-                'pattern': 'Телефон должен подходить под маску (29)121-34-57'
             }
         };
     }
     RegistrationComponent.prototype.ngOnInit = function () {
+        this.buildForm();
+    };
+    RegistrationComponent.prototype.buildForm = function () {
         var _this = this;
-        var emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$', phoneRegex = '^(\d{9})$';
+        var emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+        // let phoneRegex='^(\d{9})$';
         this.registrationForm = this.formBuilder.group({
             "login": [this.newUser.login, [forms_1.Validators.compose([forms_1.Validators.required, this.checkLogin])]
             ],
-            "password": [this.newUser.password, [forms_1.Validators.required,
-                    forms_1.Validators.minLength(3)]
+            "password": [this.newUser.password, [forms_1.Validators.required, forms_1.Validators.minLength(3)]
             ],
-            "email": [this.newUser.email, [forms_1.Validators.required,
-                    forms_1.Validators.pattern(emailRegex)]
+            "email": [this.newUser.email, [forms_1.Validators.required, forms_1.Validators.pattern(emailRegex)]
             ],
             "userName": [this.newUser.userName],
             "birthday": [this.newUser.birthday],
-            "phoneNumber": [null, forms_1.Validators.pattern(phoneRegex)]
+            "phoneNumber": [this.newUser.phoneNumber]
         });
+        // , Validators.pattern(phoneRegex)
         this.registrationForm.valueChanges
             .subscribe(function (data) { return _this.onValueChanged(data); });
         this.onValueChanged();
@@ -221,16 +221,10 @@ var RegistrationComponent = (function () {
     RegistrationComponent.prototype.onSubmit = function () {
         var user = new user_1.User(this.newUser.login, this.newUser.password, this.newUser.email, this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
         this.users.push(user);
-        //
-        // this.newUser={
-        //     login: "",
-        //     password: "",
-        //     email: "",
-        //     userName: "",
-        //     birthday: "",
-        //     phoneNumber: null
-        // };
         alert("form is submitted");
+        this.buildForm();
+        // let link = ['/editorpage', user];
+        // this.router.navigate(link);
     };
     return RegistrationComponent;
 }());

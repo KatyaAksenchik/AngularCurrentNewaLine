@@ -9,10 +9,12 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var forms_2 = require("@angular/forms");
+// import { routing, appRoutingProviders } from './app-routing.module';
 var app_component_1 = require("./app.component");
-var editArea_component_1 = require("./editArea/editArea.component");
-var editPrvArea_component_1 = require("./editPrvArea/editPrvArea.component");
+var editNews_component_1 = require("./editNews/editNews.component");
+var editorPage_component_1 = require("./editorPage/editorPage.component");
 var registration_component_1 = require("./registration/registration.component");
+var article_service_1 = require("./shared/article.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,9 +29,12 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
-            editArea_component_1.EditAreaComponent,
-            editPrvArea_component_1.EditPrvAreaComponent,
-            registration_component_1.RegistrationComponent
+            editNews_component_1.EditNewsComponent,
+            registration_component_1.RegistrationComponent,
+            editorPage_component_1.EditorPageComponent
+        ],
+        providers: [
+            article_service_1.ArticleService
         ],
         bootstrap: [app_component_1.AppComponent]
     })

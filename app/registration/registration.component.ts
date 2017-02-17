@@ -1,7 +1,7 @@
 import { Component, AfterViewChecked, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../shared/user';
 import  { users } from '../shared/data'
@@ -13,7 +13,7 @@ import  { users } from '../shared/data'
 })
 
 export class RegistrationComponent implements OnInit{
-    users = users;
+    // users = users;
 //     index=0;
 //     newUser: User = new User("", "", "");
 //
@@ -149,28 +149,32 @@ export class RegistrationComponent implements OnInit{
 //             }
 //     }
 
+    users = users;
     newUser: User = new User("", "", "");
 
     registrationForm: FormGroup;
-    constructor(private formBuilder:FormBuilder) {
-    }
+    constructor(private formBuilder:FormBuilder) {}
 
     ngOnInit() {
-        let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$',
-            phoneRegex='^(\d{9})$';
+        this.buildForm();
+    }
+    buildForm(): void {
+        let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+        // let phoneRegex='^(\d{9})$';
+
         this.registrationForm = this.formBuilder.group({
             "login": [this.newUser.login, [Validators.compose([Validators.required, this.checkLogin])]
             ],
-            "password": [this.newUser.password, [Validators.required,
-                              Validators.minLength(3)]
+            "password": [this.newUser.password, [Validators.required, Validators.minLength(3)]
             ],
-            "email": [this.newUser.email, [Validators.required,
-                                           Validators.pattern(emailRegex)]
+            "email": [this.newUser.email, [Validators.required, Validators.pattern(emailRegex)]
             ],
             "userName": [this.newUser.userName],
             "birthday": [this.newUser.birthday],
-            "phoneNumber": [null, Validators.pattern(phoneRegex)]
+            "phoneNumber": [this.newUser.phoneNumber]
         })
+
+            // , Validators.pattern(phoneRegex)
 
         this.registrationForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
@@ -197,8 +201,9 @@ export class RegistrationComponent implements OnInit{
     formErrors = {
         'login': '',
         'password': '',
-        'email': '',
-        'phoneNumber': ''
+        'email': ''
+        // ,
+        // 'phoneNumber': ''
     };
 
     validationMessages = {
@@ -213,10 +218,11 @@ export class RegistrationComponent implements OnInit{
         'email': {
             'required': 'Email обязателен для заполнения',
             'pattern': 'Email должен подходить под маску example@example.com'
-        },
-        'phoneNumber':{
-            'pattern': 'Телефон должен подходить под маску (29)121-34-57'
         }
+        // ,
+        // 'phoneNumber':{
+        //     'pattern': 'Телефон должен подходить под маску (29)121-34-57'
+        // }
 
     };
 
@@ -233,16 +239,10 @@ export class RegistrationComponent implements OnInit{
                 this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
 
         this.users.push(user);
-        //
-        // this.newUser={
-        //     login: "",
-        //     password: "",
-        //     email: "",
-        //     userName: "",
-        //     birthday: "",
-        //     phoneNumber: null
-        // };
         alert("form is submitted");
-    }
+        this.buildForm();
+        // let link = ['/editorpage', user];
+        // this.router.navigate(link);
+   }
 
 }

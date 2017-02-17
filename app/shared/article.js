@@ -1,10 +1,8 @@
-/**
- * Created by Katsiaryna on 9/02/2017.
- */
 "use strict";
 var Article = (function () {
-    function Article(articleName, imgUrl, articleText, authorName, published) {
+    function Article(id, articleName, imgUrl, articleText, authorName, published) {
         if (published === void 0) { published = false; }
+        this.id = id;
         this.articleName = articleName;
         this.imgUrl = imgUrl;
         this.articleText = articleText;

@@ -1,0 +1,50 @@
+<div class="wrapper flex-wrapper editor-flex-wrapper">
+
+    <div class="editor-main-content">
+        <h2 class="registered-header">Создание новости</h2>
+        <form class="registered-form">
+            <label>Название статьи:</label>
+            <input type="text" required name="articleName" [(ngModel)]="currentArticle.articleName" #articleName="ngModel">
+
+            <label>URL главной картинки:</label>
+            <input type="text" name="imgUrl" [(ngModel)]="currentArticle.imgUrl" #imgUrl="ngModel">
+
+            <label>Tag статьи:</label>
+            <select>
+                <option>Экономика</option>
+                <option>Спорт</option>
+                <option>Общество</option>
+            </select>
+
+            <label>Текст статьи:</label>
+            <textarea name="articleText" [(ngModel)]="currentArticle.articleText" #articleText="ngModel"></textarea>
+
+            <div class="text-center">
+                <button class="btn-styles" type="submit" (click)="addArticle(currentArticle)">
+                    сохранить
+                </button>
+                <!--<button class="btn-styles" data-operation="publishPage" type="submit">-->
+                <!--опубликовать-->
+                <!--</button>-->
+                <!--<button class="btn-styles" data-operation="previewPage" type="submit">-->
+                <!--посмотреть-->
+                <!--</button>-->
+            </div>
+        </form>
+    </div>
+    <aside class="editor-aside-block">
+        <h2 class="registered-header">Мои новости:</h2>
+        <div class="editor-news-block">
+            <editnews *ngFor="let article of articles" [article]="article" [currentArticle]="currentArticle"
+                      (publishArticle)="publishArticle($event)"
+                      (edit)="edit($event)"
+                      (delete)="delete($event)">
+            </editnews>
+        </div>
+    </aside>
+</div>
+
+
+
+
+

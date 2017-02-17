@@ -1,15 +1,16 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { HttpModule }    from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+// import { routing, appRoutingProviders } from './app-routing.module';
 
 
 import { AppComponent } from './app.component';
-import { EditAreaComponent }  from './editArea/editArea.component';
-import { EditPrvAreaComponent }  from './editPrvArea/editPrvArea.component';
+import { EditNewsComponent }  from './editNews/editNews.component';
+import { EditorPageComponent }  from './editorPage/editorPage.component';
 import { RegistrationComponent }  from './registration/registration.component';
+import { ArticleService } from './shared/article.service'
+
 
 @NgModule({
     imports: [
@@ -19,9 +20,14 @@ import { RegistrationComponent }  from './registration/registration.component';
     ],
     declarations: [
         AppComponent,
-        EditAreaComponent,
-        EditPrvAreaComponent,
-        RegistrationComponent
+        EditNewsComponent,
+        RegistrationComponent,
+        EditorPageComponent
+    ],
+    providers: [
+        ArticleService
+        // ,
+        // appRoutingProviders
     ],
     bootstrap: [AppComponent]
 })

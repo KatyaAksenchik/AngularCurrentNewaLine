@@ -1,25 +1,19 @@
+export const articles=[{
+    id: 1,
+    articleName: "Белорусам разрешили открывать электронные кошельки не выходя из дома",
+    imgUrl: "images/internet-banking.jpg",
+    articleText: "Что-то там за текст",
+    authorName: "Katya",
+    published: false
+}, {
+    id: 2,
+    articleName: "Под Парижем обокрали особняк Ротшильда",
+    imgUrl: "images/rotshild.jpg",
+    articleText: "Что-то там за текст",
+    authorName: "Katya",
+    published: true
+}];
 
-import { User } from '../shared/user';
-
-// export const articles=[{
-//     articleName: "Белорусам разрешили открывать электронные кошельки не выходя из дома",
-//     imgUrl: "images/internet-banking.jpg",
-//     articleText: "Что-то там за текст",
-//     published: false
-// }, {
-//     articleName: "Под Парижем обокрали особняк Ротшильда",
-//     imgUrl: "images/rotshild.jpg",
-//     articleText: "Что-то там за текст",
-//     published: true
-// }];
-//
-// public id: number,
-//     public login: string,
-//     public password: string,
-//     public email: string,
-//     public userName?: string,
-//     public birthday?: string,
-//     public phoneNumber?: number
 
 export const users=[
     {
