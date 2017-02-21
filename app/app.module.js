@@ -9,12 +9,15 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var forms_2 = require("@angular/forms");
-// import { routing, appRoutingProviders } from './app-routing.module';
 var app_component_1 = require("./app.component");
 var editNews_component_1 = require("./editNews/editNews.component");
 var editorPage_component_1 = require("./editorPage/editorPage.component");
 var registration_component_1 = require("./registration/registration.component");
+var newsPage_component_1 = require("./newsPage/newsPage.component");
+var mainPage_component_1 = require("./mainPage/mainPage.component");
+var logIn_component_1 = require("./logIn/logIn.component");
 var article_service_1 = require("./shared/article.service");
+var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,17 +28,19 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            forms_2.ReactiveFormsModule
+            forms_2.ReactiveFormsModule,
+            app_routing_module_1.AppRoutingModule
         ],
         declarations: [
             app_component_1.AppComponent,
             editNews_component_1.EditNewsComponent,
             registration_component_1.RegistrationComponent,
-            editorPage_component_1.EditorPageComponent
+            editorPage_component_1.EditorPageComponent,
+            newsPage_component_1.NewsPageComponent,
+            mainPage_component_1.MainPageComponent,
+            logIn_component_1.LogInComponent
         ],
-        providers: [
-            article_service_1.ArticleService
-        ],
+        providers: [article_service_1.ArticleService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

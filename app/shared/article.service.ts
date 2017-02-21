@@ -4,6 +4,7 @@ import  {Article} from './article';
 export class ArticleService {
     articles = articles;
 
+
     getArticles() {
         return this.articles;
     }
@@ -23,7 +24,6 @@ export class ArticleService {
     }
 
     editArticle(article: Article, currentArticle) {
-
        return currentArticle={
             id: article.id,
             articleName: article.articleName,
@@ -37,6 +37,5 @@ export class ArticleService {
     publishArticle(article:Article) {
         article.published = !article.published ;
     }
-
 
 }

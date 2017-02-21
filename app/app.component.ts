@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {articles} from './shared/data';
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app",
@@ -8,4 +8,6 @@ import {articles} from './shared/data';
 
 export class AppComponent{
     title: string ="Current news line";
+
+    constructor (private router: Router) {};
 }

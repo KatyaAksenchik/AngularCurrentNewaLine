@@ -1,0 +1,26 @@
+
+<!--id: article.id,-->
+<!--articleName: article.articleName,-->
+<!--imgUrl: article.imgUrl,-->
+<!--articleText: article.articleText,-->
+<!--authorName: article.authorName,-->
+<!--published: article.published-->
+
+
+<div class="wrapper flex-wrapper whole-news-flex">
+    <div class="news-main-content">
+        <h2>{{currentArticles.articleName}}</h2>
+        <p class="news-lg-add-info">
+            <span>{{currentArticles.authorName}}</span>
+            <span>24/01/17</span>
+        </p>
+        <div class="text-center">
+            <img class="news-main-pic" src="{{currentArticles.imgUrl}}"
+                 alt="{{currentArticles.articleName}}"
+                 width="380" height="214">
+        </div>
+        <div class="lg-news-text-content">
+            {{currentArticles.articleText}}
+        </div>
+    </div>
+</div>

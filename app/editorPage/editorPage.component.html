@@ -10,7 +10,7 @@
             <input type="text" name="imgUrl" [(ngModel)]="currentArticle.imgUrl" #imgUrl="ngModel">
 
             <label>Tag статьи:</label>
-            <select>
+            <select name="selector" [(ngModel)]="selector.model" #selector="ngModel">
                 <option>Экономика</option>
                 <option>Спорт</option>
                 <option>Общество</option>
@@ -26,9 +26,11 @@
                 <!--<button class="btn-styles" data-operation="publishPage" type="submit">-->
                 <!--опубликовать-->
                 <!--</button>-->
-                <!--<button class="btn-styles" data-operation="previewPage" type="submit">-->
-                <!--посмотреть-->
-                <!--</button>-->
+                <button class="btn-styles" (click)="select()" type="submit">
+                посмотреть
+                </button>
+
+
             </div>
         </form>
     </div>
@@ -38,6 +40,7 @@
             <editnews *ngFor="let article of articles" [article]="article" [currentArticle]="currentArticle"
                       (publishArticle)="publishArticle($event)"
                       (edit)="edit($event)"
+                      (direct)="direct($event)"
                       (delete)="delete($event)">
             </editnews>
         </div>

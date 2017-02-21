@@ -9,7 +9,7 @@
                         {{ article.published ? "Опубликованно" : "Редактируется" }}
                     </span>
             <i class="fa fa-globe fa-1x" aria-hidden="true" (click)="onPublishArticle()"></i>
-            <i class="fa fa-desktop fa-1x" aria-hidden="true"></i>
+            <i class="fa fa-desktop fa-1x" aria-hidden="true" (click)="onRedirectToNewsPage()"></i>
             <i class="fa fa-pencil fa-1x" aria-hidden="true" (click)="onEditArticle()"></i>
             <i class="fa fa-trash fa-1x" aria-hidden="true" (click)="onDelete()"></i>
         </div>

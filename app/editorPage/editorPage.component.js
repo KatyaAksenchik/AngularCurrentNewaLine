@@ -11,15 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var article_1 = require("../shared/article");
 var article_service_1 = require("../shared/article.service");
+var router_1 = require("@angular/router");
 var EditorPageComponent = (function () {
-    function EditorPageComponent(articleService) {
+    function EditorPageComponent(router, articleService) {
+        this.router = router;
         this.articleService = articleService;
-        this.currentArticle = new article_1.Article(1, "", "", "", "");
+        this.selector = {
+            model: ""
+        };
+        this.currentArticle = new article_1.Article(null, "", "", "", "");
         this.articles = [];
     }
     ;
     EditorPageComponent.prototype.ngOnInit = function () {
         this.articles = this.articleService.articles;
+        this.len = this.articleService.articles.length - 1;
+        this.currentArticle.id = this.articles[this.len].id + 1;
     };
     EditorPageComponent.prototype.delete = function (article) {
         this.articleService.deleteArticle(article);
@@ -30,8 +37,15 @@ var EditorPageComponent = (function () {
     EditorPageComponent.prototype.addArticle = function (currentArticle) {
         this.articleService.addArticle(currentArticle);
     };
-    EditorPageComponent.prototype.edit = function (article, currentArticle) {
-        currentArticle = this.articleService.editArticle(article, currentArticle);
+    EditorPageComponent.prototype.edit = function (article) {
+        this.currentArticle = this.articleService.editArticle(article, this.currentArticle);
+        this.articleService.deleteArticle(article);
+    };
+    EditorPageComponent.prototype.direct = function (article) {
+        this.router.navigate(['/newsPage', article.id]);
+    };
+    EditorPageComponent.prototype.select = function () {
+        console.log(this.selector);
     };
     return EditorPageComponent;
 }());
@@ -40,7 +54,7 @@ EditorPageComponent = __decorate([
         selector: 'editorPage',
         templateUrl: './app/editorPage/editorPage.component.html'
     }),
-    __metadata("design:paramtypes", [article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService])
 ], EditorPageComponent);
 exports.EditorPageComponent = EditorPageComponent;
 //# sourceMappingURL=editorPage.component.js.map

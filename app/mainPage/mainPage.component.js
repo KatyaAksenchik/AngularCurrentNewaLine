@@ -9,21 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var article_service_1 = require("../shared/article.service");
 var router_1 = require("@angular/router");
-var AppComponent = (function () {
-    function AppComponent(router) {
-        this.router = router;
-        this.title = "Current news line";
+var MainPageComponent = (function () {
+    function MainPageComponent(route, articleService) {
+        this.route = route;
+        this.articleService = articleService;
+        this.articles = [];
     }
     ;
-    return AppComponent;
+    MainPageComponent.prototype.ngOnInit = function () {
+        this.articles = this.articleService.articles;
+    };
+    return MainPageComponent;
 }());
-AppComponent = __decorate([
+MainPageComponent = __decorate([
     core_1.Component({
-        selector: "app",
-        templateUrl: './app/app.component.html'
+        selector: 'mainPage',
+        templateUrl: './app/mainPage/mainPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService])
+], MainPageComponent);
+exports.MainPageComponent = MainPageComponent;
+//# sourceMappingURL=mainPage.component.js.map

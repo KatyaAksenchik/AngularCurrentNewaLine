@@ -15,15 +15,21 @@ var EditNewsComponent = (function () {
         this.delete = new core_1.EventEmitter();
         this.publishArticle = new core_1.EventEmitter();
         this.edit = new core_1.EventEmitter();
+        this.direct = new core_1.EventEmitter();
     }
     EditNewsComponent.prototype.onPublishArticle = function () {
+        console.log("Publish news");
         this.publishArticle.emit(this.article);
     };
     EditNewsComponent.prototype.onDelete = function () {
         this.delete.emit(this.article);
     };
     EditNewsComponent.prototype.onEditArticle = function () {
-        this.edit.emit(this.article, this.currentArticle);
+        this.edit.emit(this.article);
+    };
+    EditNewsComponent.prototype.onRedirectToNewsPage = function () {
+        console.log(this.article);
+        this.direct.emit(this.article);
     };
     return EditNewsComponent;
 }());
@@ -47,6 +53,10 @@ __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], EditNewsComponent.prototype, "edit", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditNewsComponent.prototype, "direct", void 0);
 EditNewsComponent = __decorate([
     core_1.Component({
         selector: 'editnews',

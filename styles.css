@@ -104,9 +104,11 @@ footer .wrapper {
     width: 300px;
     border: solid 1px purple;
     position: absolute;
-    display: none;
+    /*display: none;*/
     z-index: 100;
     background-color: white;
+    right: 0%;
+    top: 87%;
 }
 
 .log-in-form {

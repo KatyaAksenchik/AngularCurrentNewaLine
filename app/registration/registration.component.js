@@ -15,139 +15,6 @@ var data_1 = require("../shared/data");
 var RegistrationComponent = (function () {
     function RegistrationComponent(formBuilder) {
         this.formBuilder = formBuilder;
-        // users = users;
-        //     index=0;
-        //     newUser: User = new User("", "", "");
-        //
-        //
-        //     checkLogin(){
-        //         for (let i=0; i<users.length; i++ ){
-        //             console.log("user "+users[i].login);
-        //             if(users[i].login==this.newUser.login){
-        //                 return false;
-        //             } else return true;
-        //
-        //         }
-        //     }
-        //     onSubmit(){
-        //         let user: User= new User(this.newUser.login , this.newUser.password, this.newUser.email,
-        //                 this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
-        //
-        //         this.users.push(user);
-        //
-        //         this.newUser={
-        //             login: "",
-        //             password: "",
-        //             email: "",
-        //             userName: "",
-        //             birthday: "",
-        //             phoneNumber: null
-        //         };
-        //         alert("form is submitted");
-        //     }
-        //
-        //     registrationForm: NgForm;
-        //     @ViewChild('registrationForm') currentForm: NgForm;
-        //
-        //     ngAfterViewChecked() {
-        //         this.formChanged();
-        //     }
-        //
-        //     formChanged() {
-        //         if (this.currentForm === this.registrationForm) { return; }
-        //         this.registrationForm = this.currentForm;
-        //         if (this.registrationForm) {
-        //             this.registrationForm.valueChanges
-        //                 .subscribe(data => this.onValueChanged(data));
-        //         }
-        //     }
-        //     onValueChanged(data?: any) {
-        //         if (!this.registrationForm) { return; }
-        //         const form = this.registrationForm.form;
-        //
-        //         for (const field in this.formErrors) {
-        //             this.formErrors[field] = '';
-        //             const control = form.get(field);
-        //
-        //             if (control && control.dirty && !control.valid) {
-        //                 const messages = this.validationMessages[field];
-        //                 for (const key in control.errors) {
-        //                     this.formErrors[field] += messages[key] + ' ';
-        //                 }
-        //             }
-        //         }
-        //     }
-        //
-        //     formErrors = {
-        //         'login': '',
-        //         'password': '',
-        //         'email': ''
-        //     };
-        //
-        //     validationMessages = {
-        //         'login': {
-        //             'required':      'Данное поле обязательно для заполнения'
-        //         },
-        //         'password': {
-        //             'required': 'Пароль обязателен для заполнения',
-        //             'minlength': 'Пароль должен быть длинее 3-х символов'
-        //         },
-        //         'email': {
-        //             'required': 'Email обязателен для заполнения'
-        //         }
-        //
-        //     };
-        //
-        //
-        // }
-        // implements OnInit
-        // export class RegistrationComponent implements OnInit {
-        //     users = users;
-        // checkLogin(fieldControl: FormControl){
-        //     for (let i=0; i<users.length; i++ ){
-        //         if (users[i].login==fieldControl.value[0])
-        //             return null;
-        //         else return { notExistedLogin: true };
-        //     }
-        // }
-        //
-        // registrationForm: FormGroup;
-        // constructor (private formBuilder: FormBuilder) {}
-        //
-        // ngOnInit(){
-        //     this.registrationForm=this.formBuilder.group({
-        //         login: ['', Validators.required, this.checkLogin ],
-        //         password: ['', Validators.required, Validators.minLength(3)],
-        //         email: ['', Validators.required, Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')],
-        //         userName: [],
-        //         birthday: [],
-        //         phoneNumber: [null, Validators.pattern('^(\d{9})$')]
-        //     })
-        // };
-        // ---------------------------------------------
-        //     registrationForm: FormGroup;
-        //     constructor(){
-        //         this.registrationForm=new FormGroup({
-        //             login: new FormControl('', [Validators.required, this.checkLogin]),
-        //             password: new FormControl('',[ Validators.required,
-        //                                            Validators.minLength(3)]
-        //             ),
-        //             email: new FormControl('', [ Validators.required,
-        //                                          Validators.pattern("^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
-        //             ),
-        //             userName: new FormControl(""),
-        //             birthday: new FormControl(""),
-        //             phoneNumber: new FormControl(null, Validators.pattern('^(\d{9})$'))
-        //         });
-        //     }
-        //
-        //         checkLogin(control: FormControl): {[s:string]:boolean}{
-        //             for (let i=0; i<users.length; i++ ){
-        //                 if (users[i].login == control.value[0])
-        //                     return null;
-        //                 else return {notExistedLogin: true};
-        //             }
-        //     }
         this.users = data_1.users;
         this.newUser = new user_1.User("", "", "");
         this.formErrors = {
@@ -237,4 +104,137 @@ RegistrationComponent = __decorate([
     __metadata("design:paramtypes", [forms_1.FormBuilder])
 ], RegistrationComponent);
 exports.RegistrationComponent = RegistrationComponent;
+// users = users;
+//     index=0;
+//     newUser: User = new User("", "", "");
+//
+//
+//     checkLogin(){
+//         for (let i=0; i<users.length; i++ ){
+//             console.log("user "+users[i].login);
+//             if(users[i].login==this.newUser.login){
+//                 return false;
+//             } else return true;
+//
+//         }
+//     }
+//     onSubmit(){
+//         let user: User= new User(this.newUser.login , this.newUser.password, this.newUser.email,
+//                 this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
+//
+//         this.users.push(user);
+//
+//         this.newUser={
+//             login: "",
+//             password: "",
+//             email: "",
+//             userName: "",
+//             birthday: "",
+//             phoneNumber: null
+//         };
+//         alert("form is submitted");
+//     }
+//
+//     registrationForm: NgForm;
+//     @ViewChild('registrationForm') currentForm: NgForm;
+//
+//     ngAfterViewChecked() {
+//         this.formChanged();
+//     }
+//
+//     formChanged() {
+//         if (this.currentForm === this.registrationForm) { return; }
+//         this.registrationForm = this.currentForm;
+//         if (this.registrationForm) {
+//             this.registrationForm.valueChanges
+//                 .subscribe(data => this.onValueChanged(data));
+//         }
+//     }
+//     onValueChanged(data?: any) {
+//         if (!this.registrationForm) { return; }
+//         const form = this.registrationForm.form;
+//
+//         for (const field in this.formErrors) {
+//             this.formErrors[field] = '';
+//             const control = form.get(field);
+//
+//             if (control && control.dirty && !control.valid) {
+//                 const messages = this.validationMessages[field];
+//                 for (const key in control.errors) {
+//                     this.formErrors[field] += messages[key] + ' ';
+//                 }
+//             }
+//         }
+//     }
+//
+//     formErrors = {
+//         'login': '',
+//         'password': '',
+//         'email': ''
+//     };
+//
+//     validationMessages = {
+//         'login': {
+//             'required':      'Данное поле обязательно для заполнения'
+//         },
+//         'password': {
+//             'required': 'Пароль обязателен для заполнения',
+//             'minlength': 'Пароль должен быть длинее 3-х символов'
+//         },
+//         'email': {
+//             'required': 'Email обязателен для заполнения'
+//         }
+//
+//     };
+//
+//
+// }
+// implements OnInit
+// export class RegistrationComponent implements OnInit {
+//     users = users;
+// checkLogin(fieldControl: FormControl){
+//     for (let i=0; i<users.length; i++ ){
+//         if (users[i].login==fieldControl.value[0])
+//             return null;
+//         else return { notExistedLogin: true };
+//     }
+// }
+//
+// registrationForm: FormGroup;
+// constructor (private formBuilder: FormBuilder) {}
+//
+// ngOnInit(){
+//     this.registrationForm=this.formBuilder.group({
+//         login: ['', Validators.required, this.checkLogin ],
+//         password: ['', Validators.required, Validators.minLength(3)],
+//         email: ['', Validators.required, Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')],
+//         userName: [],
+//         birthday: [],
+//         phoneNumber: [null, Validators.pattern('^(\d{9})$')]
+//     })
+// };
+// ---------------------------------------------
+//     registrationForm: FormGroup;
+//     constructor(){
+//         this.registrationForm=new FormGroup({
+//             login: new FormControl('', [Validators.required, this.checkLogin]),
+//             password: new FormControl('',[ Validators.required,
+//                                            Validators.minLength(3)]
+//             ),
+//             email: new FormControl('', [ Validators.required,
+//                                          Validators.pattern("^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
+//             ),
+//             userName: new FormControl(""),
+//             birthday: new FormControl(""),
+//             phoneNumber: new FormControl(null, Validators.pattern('^(\d{9})$'))
+//         });
+//     }
+//
+//         checkLogin(control: FormControl): {[s:string]:boolean}{
+//             for (let i=0; i<users.length; i++ ){
+//                 if (users[i].login == control.value[0])
+//                     return null;
+//                 else return {notExistedLogin: true};
+//             }
+//     }
 //# sourceMappingURL=registration.component.js.map

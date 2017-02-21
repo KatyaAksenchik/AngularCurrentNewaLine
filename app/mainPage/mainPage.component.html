@@ -1,0 +1,23 @@
+<div class="wrapper">
+    <article class="news-box-large" *ngFor="let article of articles">
+        <div>
+            <img src="{{article.imgUrl}}" alt="{{article.articleName}}" width="310" height="200">
+        </div>
+        <div class="article-content">
+            <h2>
+                {{article.articleName}}
+            </h2>
+            <p class="news-add-info">
+                <span>{{article.authorName}}</span>
+                <time>24/01/2017</time>
+                <span class="tag-box economics-tag">Экономика</span>
+            </p>
+            <p>
+                {{article.articleText}}
+            </p>
+            <p class="article-read-more">
+                <a [routerLink]="['/newsPage', article.id]">Читать дальше</a>
+            </p>
+        </div>
+    </article>
+</div>

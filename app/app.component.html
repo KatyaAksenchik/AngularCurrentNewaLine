@@ -2,29 +2,19 @@
     <div class="wrapper header-styles">
         <div>
             <h1 class="main-header">
-                <a>{{title}}</a>
+                <a [routerLink]="['/mainPage']">{{title}}</a>
             </h1>
         </div>
         <div class="log-in-block">
-            <span class="log-in-button">
-                <i class="fa fa-user-circle fa-lg"></i>
-                Войти
-            </span>
+            <logIn></logIn>
         </div>
     </div>
 </header>
+
 <main>
-
-    <editorPage>
-
-    </editorPage>
-    <!--<registration>-->
-
-    <!--</registration>-->
-    <!--<router-outlet></router-outlet>-->
-
-
+    <router-outlet></router-outlet>
 </main>
+
 <footer>
     <div class="wrapper">
         <div class="footer-contact-info">

@@ -1,17 +1,33 @@
-// import { Routes, RouterModule } from '@angular/router';
-//
-// import { EditorPageComponent }  from './editorPage/editorPage.component';
-// import { RegistrationComponent }  from './registration/registration.component';
-//
-// const routes: Routes = [
-//     { path: '', redirectTo: 'registration', pathMatch: 'full' },
-//     { path: 'editorpage', component: EditorPageComponent },
-//     { path: 'registration', component: RegistrationComponent  }
-// ];
-//
-// export const appRoutingProviders: any[] = [
-//
-// ];
-//
-// export const routing = RouterModule.forRoot(routes);
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var editorPage_component_1 = require("./editorPage/editorPage.component");
+var registration_component_1 = require("./registration/registration.component");
+var newsPage_component_1 = require("./newsPage/newsPage.component");
+var mainPage_component_1 = require("./mainPage/mainPage.component");
+var routes = [
+    { path: '', redirectTo: 'mainPage', pathMatch: 'full' },
+    { path: 'editorPage', component: editorPage_component_1.EditorPageComponent },
+    { path: 'registration', component: registration_component_1.RegistrationComponent },
+    { path: 'mainPage', component: mainPage_component_1.MainPageComponent },
+    { path: 'newsPage/:id', component: newsPage_component_1.NewsPageComponent }
+];
+var AppRoutingModule = (function () {
+    function AppRoutingModule() {
+    }
+    return AppRoutingModule;
+}());
+AppRoutingModule = __decorate([
+    core_1.NgModule({
+        imports: [router_1.RouterModule.forRoot(routes)],
+        exports: [router_1.RouterModule]
+    })
+], AppRoutingModule);
+exports.AppRoutingModule = AppRoutingModule;
 //# sourceMappingURL=app-routing.module.js.map
