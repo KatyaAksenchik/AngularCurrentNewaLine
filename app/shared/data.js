@@ -4,14 +4,14 @@ exports.articles = [{
         articleName: "Белорусам разрешили открывать электронные кошельки не выходя из дома",
         imgUrl: "images/internet-banking.jpg",
         articleText: "Белорусам разрешили открывать электронные кошельки не выходя из дома",
-        authorName: "Katya",
+        authorName: "pit",
         published: false
     }, {
         id: 2,
         articleName: "Под Парижем обокрали особняк Ротшильда",
         imgUrl: "images/rotshild.jpg",
         articleText: "Под Парижем обокрали особняк Ротшильда",
-        authorName: "Katya",
+        authorName: "pit",
         published: true
     },
     {
@@ -19,7 +19,7 @@ exports.articles = [{
         articleName: "Подняться на Эверест",
         imgUrl: "images/everest.jpg",
         articleText: "Подняться на Эверест",
-        authorName: "Katya",
+        authorName: "pit",
         published: true
     },
     {

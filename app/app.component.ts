@@ -8,6 +8,6 @@ import { Router } from '@angular/router';
 
 export class AppComponent{
     title: string ="Current news line";
-
     constructor (private router: Router) {};
+
 }

@@ -28,6 +28,7 @@ var EditNewsComponent = (function () {
         this.edit.emit(this.article);
     };
     EditNewsComponent.prototype.onRedirectToNewsPage = function () {
+        console.log("redirect to page");
         console.log(this.article);
         this.direct.emit(this.article);
     };

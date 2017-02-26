@@ -24,7 +24,7 @@ var NewsPageComponent = (function () {
         this.route.params.subscribe(function (params) {
             _this.id = +params['id'];
         });
-        this.currentArticles = this.articles[this.id - 1];
+        this.currentArticles = this.articleService.findArticle(this.id);
     };
     return NewsPageComponent;
 }());

@@ -18,6 +18,7 @@ var mainPage_component_1 = require("./mainPage/mainPage.component");
 var logIn_component_1 = require("./logIn/logIn.component");
 var article_service_1 = require("./shared/article.service");
 var app_routing_module_1 = require("./app-routing.module");
+var user_service_1 = require("./shared/user.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +30,7 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             forms_2.ReactiveFormsModule,
-            app_routing_module_1.AppRoutingModule
+            app_routing_module_1.AppRoutingModule,
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -40,7 +41,8 @@ AppModule = __decorate([
             mainPage_component_1.MainPageComponent,
             logIn_component_1.LogInComponent
         ],
-        providers: [article_service_1.ArticleService],
+        providers: [article_service_1.ArticleService,
+            user_service_1.UserService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

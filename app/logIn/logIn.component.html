@@ -1,3 +1,5 @@
+<!--<button (click)="clear()">Clear Storage</button>-->
+
 <a *ngIf="model.showAddition" [routerLink]="['/editorPage']" class="editor-mode-btn">
     <i class="fa fa-wrench fa-lg" aria-hidden="true"></i>
     Добавить новость
@@ -7,30 +9,41 @@
     <!--Войти -->
     {{ model.userName }}
 </a>
+<div class="log-in-pop-up" *ngIf="model.showForm ">
+    <!--*ngIf="model.formValid-->
+    <div *ngIf="!model.showAddition">
+       <form class="log-in-form" (ngSubmit)="onSubmit()">
 
-<div class="log-in-pop-up" *ngIf="model.showForm">
-    <form class="log-in-form" (ngSubmit)="onSubmit()">
+           <input type="text" placeholder="Логин" name="login" #login="ngModel" [(ngModel)]="userModel.login" required>
+           <input type="password" name="password" #password="ngModel" [(ngModel)]="userModel.password" placeholder="Пароль"
+                  required>
+           <p *ngIf="!model.formValid" class="warning-style">
+               Пароль или логин не верный
+           </p>
+           <div class="text-center">
+               <button type="submit" class="btn-styles" id="log-in-entance-button">
+                   Войти
+               </button>
+           </div>
 
-        <input type="text" placeholder="Логин" name="login" #login="ngModel" [(ngModel)]="model.login" required>
-        <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Пароль"
-               required>
-        <p *ngIf="!model.formTrue" class="warning-style">
-            Пароль или логин не верный
-        </p>
-        <div class="text-center">
-            <button type="submit" class="btn-styles" id="log-in-entance-button">
-                Войти
-            </button>
-        </div>
+       </form>
+       <div class="text-center">
+           <a [routerLink]="['/registration']">
+               <button class="btn-styles registr-btn-style">
+                   Регистрация
+               </button>
+           </a>
+       </div>
+   </div>
 
-    </form>
-    <div class="text-center">
-        <a [routerLink]="['/registration']">
+    <div class="text-center" *ngIf="model.showAddition">
+        <a (click)="logOut()">
             <button class="btn-styles registr-btn-style">
-                Регистрация
+                Выйти
             </button>
         </a>
     </div>
 </div>
+
 
 

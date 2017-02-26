@@ -11,22 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var article_1 = require("../shared/article");
 var article_service_1 = require("../shared/article.service");
+var user_service_1 = require("../shared/user.service");
 var router_1 = require("@angular/router");
 var EditorPageComponent = (function () {
-    function EditorPageComponent(router, articleService) {
+    function EditorPageComponent(router, articleService, userService) {
         this.router = router;
         this.articleService = articleService;
-        this.selector = {
-            model: ""
-        };
-        this.currentArticle = new article_1.Article(null, "", "", "", "");
+        this.userService = userService;
         this.articles = [];
     }
     ;
     EditorPageComponent.prototype.ngOnInit = function () {
-        this.articles = this.articleService.articles;
-        this.len = this.articleService.articles.length - 1;
-        this.currentArticle.id = this.articles[this.len].id + 1;
+        // this.activeUser=this.userService.checkActiveUser();
+        // this.articles=this.articleService.getUserArticles(this.activeUser.login);
+        // this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
+        this.buildComponent();
+    };
+    EditorPageComponent.prototype.buildComponent = function () {
+        this.activeUser = this.userService.checkActiveUser();
+        this.articles = this.articleService.getUserArticles(this.activeUser.login);
+        this.currentArticle = new article_1.Article(null, "", "", "", this.activeUser.login);
     };
     EditorPageComponent.prototype.delete = function (article) {
         this.articleService.deleteArticle(article);
@@ -36,6 +40,7 @@ var EditorPageComponent = (function () {
     };
     EditorPageComponent.prototype.addArticle = function (currentArticle) {
         this.articleService.addArticle(currentArticle);
+        this.buildComponent();
     };
     EditorPageComponent.prototype.edit = function (article) {
         this.currentArticle = this.articleService.editArticle(article, this.currentArticle);
@@ -44,9 +49,6 @@ var EditorPageComponent = (function () {
     EditorPageComponent.prototype.direct = function (article) {
         this.router.navigate(['/newsPage', article.id]);
     };
-    EditorPageComponent.prototype.select = function () {
-        console.log(this.selector);
-    };
     return EditorPageComponent;
 }());
 EditorPageComponent = __decorate([
@@ -54,7 +56,7 @@ EditorPageComponent = __decorate([
         selector: 'editorPage',
         templateUrl: './app/editorPage/editorPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
 ], EditorPageComponent);
 exports.EditorPageComponent = EditorPageComponent;
 //# sourceMappingURL=editorPage.component.js.map

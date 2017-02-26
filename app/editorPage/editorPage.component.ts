@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 
 import {Article} from '../shared/article';
 import { ArticleService } from '../shared/article.service';
+import { UserService } from '../shared/user.service';
+
 import { Router } from '@angular/router';
 
 
@@ -15,20 +17,26 @@ export class EditorPageComponent implements OnInit{
 
     articles;
     len;
-    selector={
-        model: ""
-    };
-    currentArticle = new Article(null, "", "", "", "");
+    activeUser;
+    currentArticle;
 
-    constructor(private router: Router, private articleService: ArticleService){
+    constructor(private router: Router, private articleService: ArticleService, private  userService: UserService){
         this.articles = [];
     };
 
     ngOnInit(){
-        this.articles=this.articleService.articles;
-        this.len=this.articleService.articles.length-1;
-        this.currentArticle.id=this.articles[this.len].id+1;
+        // this.activeUser=this.userService.checkActiveUser();
+        // this.articles=this.articleService.getUserArticles(this.activeUser.login);
+        // this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
+        this.buildComponent()
     }
+
+    buildComponent(){
+        this.activeUser=this.userService.checkActiveUser();
+        this.articles=this.articleService.getUserArticles(this.activeUser.login);
+        this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
+    }
+
 
     delete(article) {
         this.articleService.deleteArticle(article);
@@ -39,6 +47,7 @@ export class EditorPageComponent implements OnInit{
 
     addArticle(currentArticle){
         this.articleService.addArticle(currentArticle);
+        this.buildComponent();
     }
     
     edit(article){
@@ -48,10 +57,6 @@ export class EditorPageComponent implements OnInit{
 
     direct(article){
         this.router.navigate(['/newsPage', article.id]);
-    }
-
-    select(){
-        console.log(this.selector);
     }
 
 }

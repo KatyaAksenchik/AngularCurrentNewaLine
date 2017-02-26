@@ -12,9 +12,9 @@
     font-size: 14px;
     color: red;
 }
-
-
-
+.log-in-button{
+    cursor: pointer;
+}
 
 * {
     margin: 0;
@@ -53,6 +53,7 @@ body {
     border-top: none;
     border-bottom: none;
     background-color: rgb(255, 255, 255);
+    padding: 2px 0;
 }
 
 /*header footer styles*/
@@ -143,6 +144,7 @@ footer .wrapper {
 .article-content {
     font-size: 15px;
     padding-left: 10px;
+    width: 100%;
 }
 
 .news-add-info {

@@ -33,6 +33,7 @@ export class EditNewsComponent {
     }
 
     onRedirectToNewsPage(){
+        console.log("redirect to page");
         console.log(this.article);
         this.direct.emit(this.article);
     }

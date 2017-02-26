@@ -14,17 +14,20 @@ import {LogInComponent} from "./logIn/logIn.component";
 
 import { ArticleService } from './shared/article.service';
 import { AppRoutingModule } from './app-routing.module';
+import {UserService} from "./shared/user.service";
 
 
 @NgModule({
     imports: [
-        BrowserModule,
+        BrowserModule
+        ,
         FormsModule,
         ReactiveFormsModule,
-        AppRoutingModule
+        AppRoutingModule,
     ],
     declarations: [
-        AppComponent,
+        AppComponent
+        ,
         EditNewsComponent,
         RegistrationComponent,
         EditorPageComponent,
@@ -32,7 +35,8 @@ import { AppRoutingModule } from './app-routing.module';
         MainPageComponent,
         LogInComponent
     ],
-    providers: [ArticleService],
+    providers: [ArticleService,
+                UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule{}

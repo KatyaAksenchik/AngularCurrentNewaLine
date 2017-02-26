@@ -17,7 +17,6 @@ export class NewsPageComponent implements OnInit{
 
     constructor(private route: ActivatedRoute, private articleService: ArticleService){
         this.articles = [];
-
     };
 
     ngOnInit(){
@@ -25,7 +24,7 @@ export class NewsPageComponent implements OnInit{
         this.route.params.subscribe(params => {
             this.id = +params['id'];
         });
-        this.currentArticles=this.articles[this.id-1];
+        this.currentArticles=this.articleService.findArticle(this.id);
     }
-
+    
 }

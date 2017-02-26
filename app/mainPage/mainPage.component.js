@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var article_service_1 = require("../shared/article.service");
+var user_service_1 = require("../shared/user.service");
 var router_1 = require("@angular/router");
 var MainPageComponent = (function () {
-    function MainPageComponent(route, articleService) {
+    function MainPageComponent(route, articleService, userService) {
         this.route = route;
         this.articleService = articleService;
+        this.userService = userService;
         this.articles = [];
     }
     ;
@@ -28,7 +30,7 @@ MainPageComponent = __decorate([
         selector: 'mainPage',
         templateUrl: './app/mainPage/mainPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
 ], MainPageComponent);
 exports.MainPageComponent = MainPageComponent;
 //# sourceMappingURL=mainPage.component.js.map
