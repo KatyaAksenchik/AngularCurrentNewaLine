@@ -16,7 +16,7 @@ var ArticleService = (function () {
     };
     ArticleService.prototype.addArticle = function (currentArticle) {
         console.log(this.id);
-        var newArticle = new article_1.Article(this.id, currentArticle.articleName, currentArticle.imgUrl, currentArticle.articleText, currentArticle.authorName);
+        var newArticle = new article_1.Article(this.id, currentArticle.articleName, currentArticle.imgUrl, currentArticle.tag, currentArticle.previewText, currentArticle.articleText, currentArticle.authorName);
         this.articles.push(newArticle);
         console.log(this.articles);
         this.UserArticle.push(newArticle);
@@ -39,6 +39,8 @@ var ArticleService = (function () {
             id: article.id,
             articleName: article.articleName,
             imgUrl: article.imgUrl,
+            tag: article.tag,
+            previewText: article.previewText,
             articleText: article.articleText,
             authorName: article.authorName,
             published: article.published

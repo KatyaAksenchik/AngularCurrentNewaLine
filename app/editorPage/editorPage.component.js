@@ -12,25 +12,24 @@ var core_1 = require("@angular/core");
 var article_1 = require("../shared/article");
 var article_service_1 = require("../shared/article.service");
 var user_service_1 = require("../shared/user.service");
+var data_1 = require("../shared/data");
 var router_1 = require("@angular/router");
 var EditorPageComponent = (function () {
     function EditorPageComponent(router, articleService, userService) {
         this.router = router;
         this.articleService = articleService;
         this.userService = userService;
+        this.tags = data_1.tags;
         this.articles = [];
     }
     ;
     EditorPageComponent.prototype.ngOnInit = function () {
-        // this.activeUser=this.userService.checkActiveUser();
-        // this.articles=this.articleService.getUserArticles(this.activeUser.login);
-        // this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
         this.buildComponent();
     };
     EditorPageComponent.prototype.buildComponent = function () {
         this.activeUser = this.userService.checkActiveUser();
         this.articles = this.articleService.getUserArticles(this.activeUser.login);
-        this.currentArticle = new article_1.Article(null, "", "", "", this.activeUser.login);
+        this.currentArticle = new article_1.Article(null, "", "", "", "", "", this.activeUser.login);
     };
     EditorPageComponent.prototype.delete = function (article) {
         this.articleService.deleteArticle(article);
@@ -39,6 +38,8 @@ var EditorPageComponent = (function () {
         this.articleService.publishArticle(article);
     };
     EditorPageComponent.prototype.addArticle = function (currentArticle) {
+        console.log("currentArticle");
+        console.log(currentArticle);
         this.articleService.addArticle(currentArticle);
         this.buildComponent();
     };

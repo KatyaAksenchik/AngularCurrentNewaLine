@@ -2,7 +2,7 @@
     <!--<button (click)="push()"> click here !</button>-->
     {{ here }}
 
-    <article class="news-box-large" *ngFor="let article of articles">
+    <article class="news-box-large" *ngFor="let article of (articles | published)">
         <div>
             <img src="{{article.imgUrl}}" alt="{{article.articleName}}" width="310" height="200">
         </div>
@@ -13,10 +13,10 @@
             <p class="news-add-info">
                 <span>{{article.authorName}}</span>
                 <time>24/01/2017</time>
-                <span class="tag-box economics-tag">Экономика</span>
+                <span class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</span>
             </p>
             <p>
-                {{article.articleText}}
+                {{article.previewText}}
             </p>
             <p class="article-read-more">
                 <a [routerLink]="['/newsPage', article.id]">Читать дальше</a>

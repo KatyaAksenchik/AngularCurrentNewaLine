@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Article} from '../shared/article';
 import { ArticleService } from '../shared/article.service';
 import { UserService } from '../shared/user.service';
-
+import { tags } from '../shared/data';
 import { Router } from '@angular/router';
 
 
@@ -19,22 +19,20 @@ export class EditorPageComponent implements OnInit{
     len;
     activeUser;
     currentArticle;
-
+    tags=tags;
+    
     constructor(private router: Router, private articleService: ArticleService, private  userService: UserService){
         this.articles = [];
     };
 
     ngOnInit(){
-        // this.activeUser=this.userService.checkActiveUser();
-        // this.articles=this.articleService.getUserArticles(this.activeUser.login);
-        // this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
         this.buildComponent()
     }
 
     buildComponent(){
         this.activeUser=this.userService.checkActiveUser();
         this.articles=this.articleService.getUserArticles(this.activeUser.login);
-        this.currentArticle= new Article(null, "", "", "", this.activeUser.login);
+        this.currentArticle= new Article(null, "", "", "", "", "", this.activeUser.login);
     }
 
 
@@ -46,6 +44,8 @@ export class EditorPageComponent implements OnInit{
     }
 
     addArticle(currentArticle){
+        console.log("currentArticle");
+        console.log(currentArticle);
         this.articleService.addArticle(currentArticle);
         this.buildComponent();
     }

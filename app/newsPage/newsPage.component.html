@@ -11,7 +11,18 @@
                  width="380" height="214">
         </div>
         <div class="lg-news-text-content">
-            {{currentArticles.articleText}}
+            <p class="text-bold">{{currentArticles.previewText}}</p>
+            <p>{{currentArticles.articleText}}</p>
+        </div>
+
+        <!--*ngIf="activeUser"-->
+        <div class="text-center">
+            <button class="btn-styles">
+                редактировать
+            </button>
+            <button class="btn-styles" (click)="deleteArticle()">
+                удалить
+            </button>
         </div>
     </div>
     <aside class="lg-news-aside-info">

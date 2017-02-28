@@ -38,11 +38,6 @@ export class LogInComponent implements OnInit{
         }
     }
 
-    clear(){
-        this.userService.clearStorage();    
-    }
-    
-    
     openForm(){
        this.model.showForm=!this.model.showForm;
     }

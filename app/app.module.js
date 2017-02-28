@@ -19,6 +19,7 @@ var logIn_component_1 = require("./logIn/logIn.component");
 var article_service_1 = require("./shared/article.service");
 var app_routing_module_1 = require("./app-routing.module");
 var user_service_1 = require("./shared/user.service");
+var published_pipe_1 = require("./shared/published.pipe");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +40,8 @@ AppModule = __decorate([
             editorPage_component_1.EditorPageComponent,
             newsPage_component_1.NewsPageComponent,
             mainPage_component_1.MainPageComponent,
-            logIn_component_1.LogInComponent
+            logIn_component_1.LogInComponent,
+            published_pipe_1.PublishedPipe
         ],
         providers: [article_service_1.ArticleService,
             user_service_1.UserService],

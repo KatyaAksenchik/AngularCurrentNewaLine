@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Article} from '../shared/article';
 import { ArticleService } from '../shared/article.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class NewsPageComponent implements OnInit{
     private currentArticles;
     private id: number;
 
-    constructor(private route: ActivatedRoute, private articleService: ArticleService){
+    constructor(private route: ActivatedRoute,private router: Router, private articleService: ArticleService){
         this.articles = [];
     };
 
@@ -25,6 +26,11 @@ export class NewsPageComponent implements OnInit{
             this.id = +params['id'];
         });
         this.currentArticles=this.articleService.findArticle(this.id);
+    }
+    
+    deleteArticle(){
+        this.router.navigate(['/mainPage']);
+        this.articleService.deleteArticle(this.currentArticles);
     }
     
 }

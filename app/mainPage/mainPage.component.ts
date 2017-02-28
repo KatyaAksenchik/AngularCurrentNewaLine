@@ -4,6 +4,8 @@ import {Article} from '../shared/article';
 import { ArticleService } from '../shared/article.service';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
+import { PublishedPipe } from '../shared/published.pipe';
+
 
 @Component({
     selector: 'mainPage',
@@ -21,5 +23,4 @@ export class MainPageComponent implements OnInit{
     ngOnInit(){
         this.articles = this.articleService.articles;
     }
-    
 }

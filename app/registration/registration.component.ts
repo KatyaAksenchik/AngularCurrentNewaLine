@@ -1,34 +1,36 @@
-import { Component, AfterViewChecked, ViewChild, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 
-import { User } from '../shared/user';
-import  { users } from '../shared/data'
+import {User} from '../shared/user';
+import {UserService} from '../shared/user.service';
+import {Router} from '@angular/router';
+
 
 @Component({
-    // moduleId: module.id,
     selector: 'registration',
     templateUrl: './app/registration/registration.component.html'
 })
 
-export class RegistrationComponent implements OnInit{
-    users = users;
-    newUser: User = new User("", "", "");
+export class RegistrationComponent implements OnInit {
+    users;
+    newUser:User = new User("", "", "");
 
-    registrationForm: FormGroup;
-    constructor(private formBuilder:FormBuilder) {}
+    registrationForm:FormGroup;
+
+    constructor(private router:Router, private userService:UserService, private formBuilder:FormBuilder) {
+        this.users = [];
+    };
 
     ngOnInit() {
+        this.users = this.userService.getUsers();
         this.buildForm();
     }
-    buildForm(): void {
-        let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
-        // let phoneRegex='^(\d{9})$';
 
+    buildForm():void {
+        let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
         this.registrationForm = this.formBuilder.group({
-            "login": [this.newUser.login, [Validators.compose([Validators.required, this.checkLogin])]
-            ],
+            // "login": [this.newUser.login, [Validators.compose([Validators.required, this.checkLogin])]],
+            "login": [this.newUser.login, Validators.required],
             "password": [this.newUser.password, [Validators.required, Validators.minLength(3)]
             ],
             "email": [this.newUser.email, [Validators.required, Validators.pattern(emailRegex)]
@@ -36,18 +38,42 @@ export class RegistrationComponent implements OnInit{
             "userName": [this.newUser.userName],
             "birthday": [this.newUser.birthday],
             "phoneNumber": [this.newUser.phoneNumber]
-        })
+        });
 
-            // , Validators.pattern(phoneRegex)
+        // , Validators.pattern(phoneRegex)
 
         this.registrationForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
 
         this.onValueChanged();
-    };
+    }
 
-    onValueChanged(data?: any) {
-        if (!this.registrationForm) { return; }
+    // checkLogin(control:FormControl):{[s:string]:boolean} {
+    //     for (let i = 0; i < this.users.length; i++) {
+    //             if (this.users[i].login == control.value)
+    //             {
+    //                 return { notExistedLogin: false};
+    //             }
+    //             else {
+    //                 null;
+    //             }
+    //     }
+    // }
+
+    // checkLogin(control) {
+    //     for (let i = 0; i < this.users.length; i++) {
+    //         if (this.users[i].login == control.value) {
+    //             return false;
+    //         }
+    //     }
+    //
+    //     return true;
+    // }
+
+    onValueChanged(data?:any) {
+        if (!this.registrationForm) {
+            return;
+        }
         const form = this.registrationForm;
         for (const field in this.formErrors) {
 
@@ -66,8 +92,6 @@ export class RegistrationComponent implements OnInit{
         'login': '',
         'password': '',
         'email': ''
-        // ,
-        // 'phoneNumber': ''
     };
 
     validationMessages = {
@@ -83,34 +107,23 @@ export class RegistrationComponent implements OnInit{
             'required': 'Email обязателен для заполнения',
             'pattern': 'Email должен подходить под маску example@example.com'
         }
-        // ,
-        // 'phoneNumber':{
-        //     'pattern': 'Телефон должен подходить под маску (29)121-34-57'
-        // }
-
     };
 
-    checkLogin(control:FormControl):{[s:string]:boolean} {
-
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].login == control.value)
-                return {notExistedLogin: false};
-            else null;
-        }
-    }
-    onSubmit(){
-        let user: User= new User(this.newUser.login , this.newUser.password, this.newUser.email,
-                this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
-
-        this.users.push(user);
-        alert("form is submitted");
+    onSubmit() {
+        this.userService.addUser(this.registrationForm.value);
         this.buildForm();
-
-        // let link = ['/editorpage', user];
-        // this.router.navigate(link);
-   }
+        this.router.navigate(['/mainPage']);
+    }
 
 }
+
+// checkLogin(fieldControl: FormControl){
+// for (let i=0; i<this.users.length; i++ ){
+//     if (this.users[i].login==fieldControl.value[0])
+//         return null;
+//     else return { notExistedLogin: true };
+// }
+
 
 // users = users;
 //     index=0;

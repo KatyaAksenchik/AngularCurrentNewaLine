@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var user_1 = require("../shared/user");
-var data_1 = require("../shared/data");
+var user_service_1 = require("../shared/user.service");
+var router_1 = require("@angular/router");
 var RegistrationComponent = (function () {
-    function RegistrationComponent(formBuilder) {
+    function RegistrationComponent(router, userService, formBuilder) {
+        this.router = router;
+        this.userService = userService;
         this.formBuilder = formBuilder;
-        this.users = data_1.users;
         this.newUser = new user_1.User("", "", "");
         this.formErrors = {
             'login': '',
@@ -36,17 +38,19 @@ var RegistrationComponent = (function () {
                 'pattern': 'Email должен подходить под маску example@example.com'
             }
         };
+        this.users = [];
     }
+    ;
     RegistrationComponent.prototype.ngOnInit = function () {
+        this.users = this.userService.getUsers();
         this.buildForm();
     };
     RegistrationComponent.prototype.buildForm = function () {
         var _this = this;
         var emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
-        // let phoneRegex='^(\d{9})$';
         this.registrationForm = this.formBuilder.group({
-            "login": [this.newUser.login, [forms_1.Validators.compose([forms_1.Validators.required, this.checkLogin])]
-            ],
+            // "login": [this.newUser.login, [Validators.compose([Validators.required, this.checkLogin])]],
+            "login": [this.newUser.login, forms_1.Validators.required],
             "password": [this.newUser.password, [forms_1.Validators.required, forms_1.Validators.minLength(3)]
             ],
             "email": [this.newUser.email, [forms_1.Validators.required, forms_1.Validators.pattern(emailRegex)]
@@ -60,7 +64,26 @@ var RegistrationComponent = (function () {
             .subscribe(function (data) { return _this.onValueChanged(data); });
         this.onValueChanged();
     };
-    ;
+    // checkLogin(control:FormControl):{[s:string]:boolean} {
+    //     for (let i = 0; i < this.users.length; i++) {
+    //             if (this.users[i].login == control.value)
+    //             {
+    //                 return { notExistedLogin: false};
+    //             }
+    //             else {
+    //                 null;
+    //             }
+    //     }
+    // }
+    // checkLogin(control) {
+    //     for (let i = 0; i < this.users.length; i++) {
+    //         if (this.users[i].login == control.value) {
+    //             return false;
+    //         }
+    //     }
+    //
+    //     return true;
+    // }
     RegistrationComponent.prototype.onValueChanged = function (data) {
         if (!this.registrationForm) {
             return;
@@ -77,33 +100,27 @@ var RegistrationComponent = (function () {
             }
         }
     };
-    RegistrationComponent.prototype.checkLogin = function (control) {
-        for (var i = 0; i < data_1.users.length; i++) {
-            if (data_1.users[i].login == control.value)
-                return { notExistedLogin: false };
-            else
-                null;
-        }
-    };
     RegistrationComponent.prototype.onSubmit = function () {
-        var user = new user_1.User(this.newUser.login, this.newUser.password, this.newUser.email, this.newUser.userName, this.newUser.birthday, this.newUser.phoneNumber);
-        this.users.push(user);
-        alert("form is submitted");
+        this.userService.addUser(this.registrationForm.value);
         this.buildForm();
-        // let link = ['/editorpage', user];
-        // this.router.navigate(link);
+        this.router.navigate(['/mainPage']);
     };
     return RegistrationComponent;
 }());
 RegistrationComponent = __decorate([
     core_1.Component({
-        // moduleId: module.id,
         selector: 'registration',
         templateUrl: './app/registration/registration.component.html'
     }),
-    __metadata("design:paramtypes", [forms_1.FormBuilder])
+    __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService, forms_1.FormBuilder])
 ], RegistrationComponent);
 exports.RegistrationComponent = RegistrationComponent;
+// checkLogin(fieldControl: FormControl){
+// for (let i=0; i<this.users.length; i++ ){
+//     if (this.users[i].login==fieldControl.value[0])
+//         return null;
+//     else return { notExistedLogin: true };
+// }
 // users = users;
 //     index=0;
 //     newUser: User = new User("", "", "");

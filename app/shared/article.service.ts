@@ -18,13 +18,15 @@ export class ArticleService {
         return this.UserArticle;
     }
 
-    addArticle(currentArticle:Article) {
+    addArticle(currentArticle) {
         console.log(this.id);
-        let newArticle:Article = new Article(this.id, currentArticle.articleName, currentArticle.imgUrl, currentArticle.articleText, currentArticle.authorName);
+        let newArticle = new Article(this.id, currentArticle.articleName,
+            currentArticle.imgUrl,currentArticle.tag, currentArticle.previewText,
+            currentArticle.articleText, currentArticle.authorName);
         this.articles.push(newArticle);
-        console.log(this.articles);
+            console.log(this.articles);
         this.UserArticle.push(newArticle);
-        console.log(this.UserArticle);
+            console.log(this.UserArticle);
         this.id++;
         alert("Добавлена новость");
     }
@@ -49,6 +51,8 @@ export class ArticleService {
             id: article.id,
             articleName: article.articleName,
             imgUrl: article.imgUrl,
+            tag: article.tag,
+            previewText: article.previewText,
             articleText: article.articleText,
             authorName: article.authorName,
             published: article.published

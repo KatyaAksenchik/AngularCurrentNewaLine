@@ -7,6 +7,10 @@
 .ng-invalid:not(form)  {
     border-bottom: 3px solid #ec3f35;
 }
+.text-bold{
+    font-weight: 600;
+}
+
 
 .warning-style{
     font-size: 14px;
@@ -154,6 +158,7 @@ footer .wrapper {
 
 .news-add-info span, .news-add-info time {
     margin-right: 25px;
+    text-transform: capitalize;
 }
 
 .tag-box {
@@ -233,6 +238,8 @@ footer .wrapper {
     text-align: justify;
 }
 
+
+
 .news-lg-add-info {
     text-align: right;
 }
@@ -283,6 +290,9 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     resize: none;
     height: 250px;
 }
+.registered-form .preview-textarea{
+    height: 140px;
+}
 
 .registered-form {
     padding: 15px 5% 2%;
@@ -300,7 +310,7 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
 
 .editor-news-block {
     padding: 0px 15px;
-    height: 580px;
+    height: 750px;
     overflow-y: scroll;
 }
 

@@ -38,9 +38,6 @@ var LogInComponent = (function () {
             this.model.userName = "Войти";
         }
     };
-    LogInComponent.prototype.clear = function () {
-        this.userService.clearStorage();
-    };
     LogInComponent.prototype.openForm = function () {
         this.model.showForm = !this.model.showForm;
     };

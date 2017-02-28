@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var article_service_1 = require("../shared/article.service");
 var router_1 = require("@angular/router");
+var router_2 = require("@angular/router");
 var NewsPageComponent = (function () {
-    function NewsPageComponent(route, articleService) {
+    function NewsPageComponent(route, router, articleService) {
         this.route = route;
+        this.router = router;
         this.articleService = articleService;
         this.articles = [];
     }
@@ -26,6 +28,10 @@ var NewsPageComponent = (function () {
         });
         this.currentArticles = this.articleService.findArticle(this.id);
     };
+    NewsPageComponent.prototype.deleteArticle = function () {
+        this.router.navigate(['/mainPage']);
+        this.articleService.deleteArticle(this.currentArticles);
+    };
     return NewsPageComponent;
 }());
 NewsPageComponent = __decorate([
@@ -33,7 +39,7 @@ NewsPageComponent = __decorate([
         selector: 'newsPage',
         templateUrl: './app/newsPage/newsPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService])
 ], NewsPageComponent);
 exports.NewsPageComponent = NewsPageComponent;
 //# sourceMappingURL=newsPage.component.js.map

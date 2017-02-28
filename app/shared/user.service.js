@@ -5,12 +5,6 @@ var UserService = (function () {
     function UserService() {
         this.users = data_1.users;
     }
-    //     ngOnInit{
-    //
-    // }
-    //     initialiseUsers(){
-    //
-    //     }
     UserService.prototype.getUsers = function () {
         return this.users;
     };

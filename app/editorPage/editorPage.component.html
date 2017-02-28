@@ -10,11 +10,20 @@
             <input type="text" name="imgUrl" [(ngModel)]="currentArticle.imgUrl" #imgUrl="ngModel">
 
             <label>Tag статьи:</label>
-            <select name="selector" [(ngModel)]="selector.model" #selector="ngModel">
-                <option>Экономика</option>
-                <option>Спорт</option>
-                <option>Общество</option>
+            <select name="tag" [(ngModel)]="currentArticle.tag" #tag="ngModel">
+                <!--<option>Экономика</option>-->
+                <!--<option>Спорт</option>-->
+                <!--<option>Общество</option>-->
+                <option *ngFor="let tag of tags" [ngValue]="tag">
+                    {{tag.name}}
+                </option>
+
             </select>
+
+            <label>Краткий текст статьи:</label>
+            <textarea class="preview-textarea"
+                      name="previewText" [(ngModel)]="currentArticle.previewText" #previewText="ngModel">
+            </textarea>
 
             <label>Текст статьи:</label>
             <textarea name="articleText" [(ngModel)]="currentArticle.articleText" #articleText="ngModel"></textarea>

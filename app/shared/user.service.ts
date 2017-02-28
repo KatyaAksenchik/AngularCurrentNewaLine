@@ -5,13 +5,6 @@ import  {User} from './user';
 export class UserService {
     users = users;
 
-//     ngOnInit{
-//
-// }
-//     initialiseUsers(){
-//
-//     }
-
     getUsers() {
         return this.users;
     }

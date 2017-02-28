@@ -15,12 +15,12 @@ import {LogInComponent} from "./logIn/logIn.component";
 import { ArticleService } from './shared/article.service';
 import { AppRoutingModule } from './app-routing.module';
 import {UserService} from "./shared/user.service";
+import {PublishedPipe} from "./shared/published.pipe";
 
 
 @NgModule({
     imports: [
-        BrowserModule
-        ,
+        BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
@@ -33,7 +33,8 @@ import {UserService} from "./shared/user.service";
         EditorPageComponent,
         NewsPageComponent,
         MainPageComponent,
-        LogInComponent
+        LogInComponent,
+        PublishedPipe
     ],
     providers: [ArticleService,
                 UserService],
