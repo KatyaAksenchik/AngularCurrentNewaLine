@@ -12,7 +12,9 @@ const routes: Routes = [
     { path: 'editorPage', component: EditorPageComponent },
     { path: 'registration', component: RegistrationComponent  },
     { path: 'mainPage', component: MainPageComponent },
-    { path: 'newsPage/:id', component: NewsPageComponent }
+    { path: 'newsPage/:id', component: NewsPageComponent },
+    { path: 'editorPage/:id', component: EditorPageComponent }
+
 ];
 
 @NgModule({

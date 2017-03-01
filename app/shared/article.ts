@@ -8,6 +8,8 @@ export class Article{
                  public previewText: string,
                  public articleText: string,
                  public authorName: string,
+                 public publishDate: string,
+                 public authorLogin: string,
                  public published: boolean = false
     ){}
 }

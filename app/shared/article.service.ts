@@ -4,46 +4,51 @@ import  {Article} from './article';
 
 export class ArticleService {
     articles = articles;
-    UserArticle;
     id = articles[articles.length - 1].id + 1;
+    temporaryArticle;
+    
 
     getArticles() {
         return this.articles;
     }
+    
+    setTemporaryArticle(currentArticle){
+        currentArticle.id=0;
+        this.temporaryArticle=currentArticle;
+    }
+    
+    getTemporaryArticle(){
+        return this.temporaryArticle;
+    }
 
-    getUserArticles(user) {
-        this.UserArticle = this.articles.filter(
-            article => article.authorName === user);
-        console.log(this.UserArticle);
-        return this.UserArticle;
+    clearTemporaryArticle(){
+        this.temporaryArticle={};
     }
 
     addArticle(currentArticle) {
-        console.log(this.id);
-        let newArticle = new Article(this.id, currentArticle.articleName,
-            currentArticle.imgUrl,currentArticle.tag, currentArticle.previewText,
-            currentArticle.articleText, currentArticle.authorName);
+        let newArticle = new Article(
+                    this.id, 
+                    currentArticle.articleName,
+                    currentArticle.imgUrl,
+                    currentArticle.tag, 
+                    currentArticle.previewText,
+                    currentArticle.articleText, 
+                    currentArticle.authorName,
+                    currentArticle.publishDate,
+                    currentArticle.authorLogin,
+                    currentArticle.published
+        );
         this.articles.push(newArticle);
-            console.log(this.articles);
-        this.UserArticle.push(newArticle);
-            console.log(this.UserArticle);
         this.id++;
         alert("Добавлена новость");
     }
 
-    deleteArticle(article:Article) {
+    deleteArticle(article) {
 
         let index = this.articles.indexOf(article);
         if (index > -1) {
             this.articles.splice(index, 1);
         }
-
-
-        let index_user = this.UserArticle.indexOf(article);
-        if (index_user > -1) {
-            this.UserArticle.splice(index_user, 1);
-        }
-
     }
 
     editArticle(article:Article, currentArticle) {
@@ -55,12 +60,15 @@ export class ArticleService {
             previewText: article.previewText,
             articleText: article.articleText,
             authorName: article.authorName,
+            publishDate: article.publishDate,
+            authorLogin: article.authorLogin,
             published: article.published
         }
     }
 
     publishArticle(article:Article) {
         article.published = !article.published;
+        article.publishDate = ""+(new Date());
     }
 
     findArticle(id){

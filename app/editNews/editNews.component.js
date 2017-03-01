@@ -13,13 +13,12 @@ var article_1 = require("../shared/article");
 var EditNewsComponent = (function () {
     function EditNewsComponent() {
         this.delete = new core_1.EventEmitter();
-        this.publishArticle = new core_1.EventEmitter();
+        this.changePublishState = new core_1.EventEmitter();
         this.edit = new core_1.EventEmitter();
         this.direct = new core_1.EventEmitter();
     }
     EditNewsComponent.prototype.onPublishArticle = function () {
-        console.log("Publish news");
-        this.publishArticle.emit(this.article);
+        this.changePublishState.emit(this.article);
     };
     EditNewsComponent.prototype.onDelete = function () {
         this.delete.emit(this.article);
@@ -28,8 +27,6 @@ var EditNewsComponent = (function () {
         this.edit.emit(this.article);
     };
     EditNewsComponent.prototype.onRedirectToNewsPage = function () {
-        console.log("redirect to page");
-        console.log(this.article);
         this.direct.emit(this.article);
     };
     return EditNewsComponent;
@@ -49,7 +46,7 @@ __decorate([
 __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
-], EditNewsComponent.prototype, "publishArticle", void 0);
+], EditNewsComponent.prototype, "changePublishState", void 0);
 __decorate([
     core_1.Output(),
     __metadata("design:type", Object)

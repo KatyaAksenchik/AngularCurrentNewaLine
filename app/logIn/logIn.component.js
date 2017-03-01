@@ -85,18 +85,4 @@ LogInComponent = __decorate([
     __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService])
 ], LogInComponent);
 exports.LogInComponent = LogInComponent;
-// this.model.formTrue=false;
-// for(let i=0; i<users.length; i++){
-//     if(this.model.login==users[i].login && this.model.password==users[i].password){
-//         alert("Вы зарегистрировались");
-//         this.model={
-//             userName: this.model.login,
-//             login: "",
-//             password: "",
-//             formTrue: true,
-//             showAddition: true,
-//             showForm: false,
-//         }
-//     }
-// } 
 //# sourceMappingURL=logIn.component.js.map

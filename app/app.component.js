@@ -10,12 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var user_service_1 = require("./shared/user.service");
 var AppComponent = (function () {
-    function AppComponent(router) {
+    function AppComponent(router, userService) {
         this.router = router;
+        this.userService = userService;
         this.title = "Current news line";
     }
     ;
+    AppComponent.prototype.ngOnInit = function () {
+        if (this.userService.checkActiveUser()) {
+            return;
+        }
+        else {
+            this.userService.clearStorage();
+        }
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
@@ -23,7 +33,7 @@ AppComponent = __decorate([
         selector: "app",
         templateUrl: './app/app.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

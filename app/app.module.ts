@@ -16,6 +16,7 @@ import { ArticleService } from './shared/article.service';
 import { AppRoutingModule } from './app-routing.module';
 import {UserService} from "./shared/user.service";
 import {PublishedPipe} from "./shared/published.pipe";
+import {UserArticlePipe} from "./shared/user.article.pipe";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {PublishedPipe} from "./shared/published.pipe";
         NewsPageComponent,
         MainPageComponent,
         LogInComponent,
-        PublishedPipe
+        PublishedPipe,
+        UserArticlePipe
     ],
     providers: [ArticleService,
                 UserService],

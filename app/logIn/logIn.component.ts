@@ -21,7 +21,7 @@ export class LogInComponent implements OnInit{
         showForm: false
     };
 
-    userModel ={
+    userModel = {
         login: "",
         password: ""
     };
@@ -84,18 +84,3 @@ export class LogInComponent implements OnInit{
 
     
 }
-
-// this.model.formTrue=false;
-// for(let i=0; i<users.length; i++){
-//     if(this.model.login==users[i].login && this.model.password==users[i].password){
-//         alert("Вы зарегистрировались");
-//         this.model={
-//             userName: this.model.login,
-//             login: "",
-//             password: "",
-//             formTrue: true,
-//             showAddition: true,
-//             showForm: false,
-//         }
-//     }
-// }

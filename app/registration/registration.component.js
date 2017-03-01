@@ -22,7 +22,8 @@ var RegistrationComponent = (function () {
         this.formErrors = {
             'login': '',
             'password': '',
-            'email': ''
+            'email': '',
+            'userName': '',
         };
         this.validationMessages = {
             'login': {
@@ -36,6 +37,9 @@ var RegistrationComponent = (function () {
             'email': {
                 'required': 'Email обязателен для заполнения',
                 'pattern': 'Email должен подходить под маску example@example.com'
+            },
+            'userName': {
+                'required': 'Данное поле обязательно для заполнения'
             }
         };
         this.users = [];
@@ -55,7 +59,7 @@ var RegistrationComponent = (function () {
             ],
             "email": [this.newUser.email, [forms_1.Validators.required, forms_1.Validators.pattern(emailRegex)]
             ],
-            "userName": [this.newUser.userName],
+            "userName": [this.newUser.userName, forms_1.Validators.required],
             "birthday": [this.newUser.birthday],
             "phoneNumber": [this.newUser.phoneNumber]
         });

@@ -13,15 +13,14 @@ export class EditNewsComponent {
     @Input() currentArticle:Article;
 
     @Output() delete = new EventEmitter();
-    @Output() publishArticle = new EventEmitter();
+    @Output() changePublishState = new EventEmitter();
     @Output() edit = new EventEmitter();
     @Output() direct = new EventEmitter();
 
 
 
     onPublishArticle() {
-        console.log("Publish news");
-        this.publishArticle.emit(this.article);
+        this.changePublishState.emit(this.article);
     }
 
     onDelete() {
@@ -33,8 +32,6 @@ export class EditNewsComponent {
     }
 
     onRedirectToNewsPage(){
-        console.log("redirect to page");
-        console.log(this.article);
         this.direct.emit(this.article);
     }
 

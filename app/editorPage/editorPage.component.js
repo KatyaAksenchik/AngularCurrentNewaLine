@@ -14,8 +14,10 @@ var article_service_1 = require("../shared/article.service");
 var user_service_1 = require("../shared/user.service");
 var data_1 = require("../shared/data");
 var router_1 = require("@angular/router");
+var router_2 = require("@angular/router");
 var EditorPageComponent = (function () {
-    function EditorPageComponent(router, articleService, userService) {
+    function EditorPageComponent(route, router, articleService, userService) {
+        this.route = route;
         this.router = router;
         this.articleService = articleService;
         this.userService = userService;
@@ -24,31 +26,53 @@ var EditorPageComponent = (function () {
     }
     ;
     EditorPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.buildComponent();
+        this.route.params.subscribe(function (params) {
+            _this.id = +params['id'];
+        });
+        if (isNaN(this.id) == false) {
+            if (this.id !== 0) {
+                this.editState = "Редактирование новости";
+                this.currentArticle = this.articleService.findArticle(this.id);
+                this.articleService.deleteArticle(this.currentArticle);
+            }
+            else {
+                this.currentArticle = this.articleService.getTemporaryArticle();
+            }
+        }
     };
     EditorPageComponent.prototype.buildComponent = function () {
+        this.editState = "Создание новости";
         this.activeUser = this.userService.checkActiveUser();
-        this.articles = this.articleService.getUserArticles(this.activeUser.login);
-        this.currentArticle = new article_1.Article(null, "", "", "", "", "", this.activeUser.login);
+        this.articles = this.articleService.getArticles();
+        this.currentArticle = new article_1.Article(null, "", "", "", "", "", this.activeUser.userName, "" + (new Date()), this.activeUser.login);
     };
     EditorPageComponent.prototype.delete = function (article) {
         this.articleService.deleteArticle(article);
     };
-    EditorPageComponent.prototype.publishArticle = function (article) {
+    EditorPageComponent.prototype.changePublishState = function (article) {
         this.articleService.publishArticle(article);
     };
     EditorPageComponent.prototype.addArticle = function (currentArticle) {
-        console.log("currentArticle");
-        console.log(currentArticle);
         this.articleService.addArticle(currentArticle);
         this.buildComponent();
     };
     EditorPageComponent.prototype.edit = function (article) {
+        this.editState = "Редактирование новости";
         this.currentArticle = this.articleService.editArticle(article, this.currentArticle);
         this.articleService.deleteArticle(article);
     };
     EditorPageComponent.prototype.direct = function (article) {
         this.router.navigate(['/newsPage', article.id]);
+    };
+    EditorPageComponent.prototype.publishArticle = function (currentArticle) {
+        currentArticle.published = true;
+        this.addArticle(currentArticle);
+    };
+    EditorPageComponent.prototype.previewPage = function (currentArticle) {
+        this.articleService.setTemporaryArticle(currentArticle);
+        this.router.navigate(['/newsPage', 0]);
     };
     return EditorPageComponent;
 }());
@@ -57,7 +81,7 @@ EditorPageComponent = __decorate([
         selector: 'editorPage',
         templateUrl: './app/editorPage/editorPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
+    __metadata("design:paramtypes", [router_2.ActivatedRoute, router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
 ], EditorPageComponent);
 exports.EditorPageComponent = EditorPageComponent;
 //# sourceMappingURL=editorPage.component.js.map

@@ -16,10 +16,12 @@ var UserService = (function () {
     };
     UserService.prototype.setActiveUser = function (user) {
         localStorage.setItem('ActiveUser', JSON.stringify(user));
-        alert("Look to Storage");
     };
     UserService.prototype.checkActiveUser = function () {
         return JSON.parse(localStorage.getItem('ActiveUser'));
+    };
+    UserService.prototype.clearStorage = function () {
+        localStorage.setItem('ActiveUser', JSON.stringify({ login: "" }));
     };
     UserService.prototype.checkIfUserExist = function (userModel) {
         var result;
@@ -37,8 +39,15 @@ var UserService = (function () {
         }
         return result;
     };
-    UserService.prototype.clearStorage = function () {
-        localStorage.setItem('ActiveUser', JSON.stringify({ login: "" }));
+    UserService.prototype.displayEditButtons = function (currentArticle) {
+        if (this.checkActiveUser().login == "") {
+            return false;
+        }
+        else if (this.checkActiveUser().login == currentArticle.authorLogin) {
+            return true;
+        }
+        else
+            return false;
     };
     return UserService;
 }());

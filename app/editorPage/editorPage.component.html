@@ -1,8 +1,8 @@
 <div class="wrapper flex-wrapper editor-flex-wrapper">
 
     <div class="editor-main-content">
-        <h2 class="registered-header">Создание новости</h2>
-        <form class="registered-form">
+        <h2 class="registered-header">{{editState}}</h2>
+        <form class="registered-form" #editorForm="ngForm">
             <label>Название статьи:</label>
             <input type="text" required name="articleName" [(ngModel)]="currentArticle.articleName" #articleName="ngModel">
 
@@ -28,26 +28,33 @@
             <label>Текст статьи:</label>
             <textarea name="articleText" [(ngModel)]="currentArticle.articleText" #articleText="ngModel"></textarea>
 
-            <div class="text-center">
-                <button class="btn-styles" type="submit" (click)="addArticle(currentArticle)">
+            <div class="text-center" >
+
+                <button class="btn-styles" type="submit" (click)="addArticle(currentArticle)"  [disabled]="!editorForm.form.valid">
                     сохранить
                 </button>
-                <!--<button class="btn-styles" data-operation="publishPage" type="submit">-->
-                <!--опубликовать-->
-                <!--</button>-->
-                <button class="btn-styles" (click)="select()" type="submit">
+                <button class="btn-styles" data-operation="publishPage" type="submit"
+                        [disabled]="!editorForm.form.valid"
+                        (click)="publishArticle(currentArticle)"  >
+                опубликовать
+                </button>
+                <button class="btn-styles" (click)="previewPage(currentArticle)"
+                        [disabled]="!editorForm.form.valid"
+                        type="submit">
                 посмотреть
                 </button>
 
 
             </div>
         </form>
+        <!--{{ activeUser.login }}-->
     </div>
+
     <aside class="editor-aside-block">
         <h2 class="registered-header">Мои новости:</h2>
         <div class="editor-news-block">
-            <editnews *ngFor="let article of articles" [article]="article" [currentArticle]="currentArticle"
-                      (publishArticle)="publishArticle($event)"
+            <editnews *ngFor="let article of (articles | userArticle: activeUser.login)" [article]="article" [currentArticle]="currentArticle"
+                      (changePublishState)="changePublishState($event)"
                       (edit)="edit($event)"
                       (direct)="direct($event)"
                       (delete)="delete($event)">

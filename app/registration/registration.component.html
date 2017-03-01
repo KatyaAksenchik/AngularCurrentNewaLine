@@ -85,8 +85,11 @@
         </div>
         <hr class="form-divider">
         <div class="registration-field-box">
-            <label>Имя и Фамилия</label>
-            <input type="text" placeholder="Имя Фамилия" id="userName" formControlName="userName">
+            <label>Имя и Фамилия автора *</label>
+            <input type="text" placeholder="Имя Фамилия" id="userName" formControlName="userName" required>
+            <div *ngIf="formErrors.userName" class="warning-style">
+                {{ formErrors.userName }}
+            </div>
         </div>
         <div class="registration-field-box" >
             <label>Дата рождения</label>

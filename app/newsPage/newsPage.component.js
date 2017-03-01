@@ -10,27 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var article_service_1 = require("../shared/article.service");
+var user_service_1 = require("../shared/user.service");
 var router_1 = require("@angular/router");
 var router_2 = require("@angular/router");
 var NewsPageComponent = (function () {
-    function NewsPageComponent(route, router, articleService) {
+    function NewsPageComponent(route, router, articleService, userService) {
         this.route = route;
         this.router = router;
         this.articleService = articleService;
-        this.articles = [];
+        this.userService = userService;
+        // this.articles = [];
     }
     ;
     NewsPageComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.articles = this.articleService.articles;
         this.route.params.subscribe(function (params) {
             _this.id = +params['id'];
         });
-        this.currentArticles = this.articleService.findArticle(this.id);
+        if (this.id == 0) {
+            this.currentArticles = this.articleService.getTemporaryArticle();
+        }
+        else {
+            this.currentArticles = this.articleService.findArticle(this.id);
+        }
+        this.model = this.userService.displayEditButtons(this.currentArticles);
     };
     NewsPageComponent.prototype.deleteArticle = function () {
         this.router.navigate(['/mainPage']);
-        this.articleService.deleteArticle(this.currentArticles);
+        if (this.id !== 0) {
+            this.articleService.deleteArticle(this.currentArticles);
+        }
+        {
+            this.articleService.clearTemporaryArticle();
+            this.router.navigate(['/editorPage']);
+        }
+    };
+    NewsPageComponent.prototype.directToEdit = function () {
+        this.router.navigate(['/editorPage', this.currentArticles.id]);
     };
     return NewsPageComponent;
 }());
@@ -39,7 +55,7 @@ NewsPageComponent = __decorate([
         selector: 'newsPage',
         templateUrl: './app/newsPage/newsPage.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
 ], NewsPageComponent);
 exports.NewsPageComponent = NewsPageComponent;
 //# sourceMappingURL=newsPage.component.js.map

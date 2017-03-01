@@ -16,6 +16,9 @@
         flex-wrap: wrap;
         align-items: center;
     }
+    .log-in-pop-up{
+        top: 63px;
+    }
 
     footer .wrapper {
         padding: 15px;
@@ -113,8 +116,11 @@
 
     .registration-field-box p, .registration-field-box [type="text"], .registration-field-box input[type="password"],
     .registration-field-box input[type="email"], .registration-field-box input[type="date"], .news-box-aside h3,
-    .news-box-md {
+    .news-box-md, .registration-field-box label {
         width: 100%;
+    }
+    .registration-field-box label{
+        text-align: center;
     }
 
     /*whole news*/
@@ -128,7 +134,7 @@
     }
 
     .main-header {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     /*index page*/
@@ -175,6 +181,12 @@
 
     .tree-in-one-img-block {
         padding: 15px 10px 5px;
+    }
+
+    .log-in-pop-up {
+        top: 82px;
+        left: 50%;
+        margin-left: -150px;
     }
 
 }

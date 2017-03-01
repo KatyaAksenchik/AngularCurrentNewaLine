@@ -16,8 +16,8 @@
         </div>
 
         <!--*ngIf="activeUser"-->
-        <div class="text-center">
-            <button class="btn-styles">
+        <div class="text-center" *ngIf="model">
+            <button class="btn-styles" (click)="directToEdit()">
                 редактировать
             </button>
             <button class="btn-styles" (click)="deleteArticle()">

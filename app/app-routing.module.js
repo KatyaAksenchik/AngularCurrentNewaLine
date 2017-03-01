@@ -16,7 +16,8 @@ var routes = [
     { path: 'editorPage', component: editorPage_component_1.EditorPageComponent },
     { path: 'registration', component: registration_component_1.RegistrationComponent },
     { path: 'mainPage', component: mainPage_component_1.MainPageComponent },
-    { path: 'newsPage/:id', component: newsPage_component_1.NewsPageComponent }
+    { path: 'newsPage/:id', component: newsPage_component_1.NewsPageComponent },
+    { path: 'editorPage/:id', component: editorPage_component_1.EditorPageComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
             ],
             "email": [this.newUser.email, [Validators.required, Validators.pattern(emailRegex)]
             ],
-            "userName": [this.newUser.userName],
+            "userName": [this.newUser.userName, Validators.required],
             "birthday": [this.newUser.birthday],
             "phoneNumber": [this.newUser.phoneNumber]
         });
@@ -91,7 +91,8 @@ export class RegistrationComponent implements OnInit {
     formErrors = {
         'login': '',
         'password': '',
-        'email': ''
+        'email': '',
+        'userName': '',
     };
 
     validationMessages = {
@@ -106,6 +107,9 @@ export class RegistrationComponent implements OnInit {
         'email': {
             'required': 'Email обязателен для заполнения',
             'pattern': 'Email должен подходить под маску example@example.com'
+        },
+        'userName':{
+            'required': 'Данное поле обязательно для заполнения'
         }
     };
 

@@ -9,18 +9,19 @@ var ArticleService = (function () {
     ArticleService.prototype.getArticles = function () {
         return this.articles;
     };
-    ArticleService.prototype.getUserArticles = function (user) {
-        this.UserArticle = this.articles.filter(function (article) { return article.authorName === user; });
-        console.log(this.UserArticle);
-        return this.UserArticle;
+    ArticleService.prototype.setTemporaryArticle = function (currentArticle) {
+        currentArticle.id = 0;
+        this.temporaryArticle = currentArticle;
+    };
+    ArticleService.prototype.getTemporaryArticle = function () {
+        return this.temporaryArticle;
+    };
+    ArticleService.prototype.clearTemporaryArticle = function () {
+        this.temporaryArticle = {};
     };
     ArticleService.prototype.addArticle = function (currentArticle) {
-        console.log(this.id);
-        var newArticle = new article_1.Article(this.id, currentArticle.articleName, currentArticle.imgUrl, currentArticle.tag, currentArticle.previewText, currentArticle.articleText, currentArticle.authorName);
+        var newArticle = new article_1.Article(this.id, currentArticle.articleName, currentArticle.imgUrl, currentArticle.tag, currentArticle.previewText, currentArticle.articleText, currentArticle.authorName, currentArticle.publishDate, currentArticle.authorLogin, currentArticle.published);
         this.articles.push(newArticle);
-        console.log(this.articles);
-        this.UserArticle.push(newArticle);
-        console.log(this.UserArticle);
         this.id++;
         alert("Добавлена новость");
     };
@@ -28,10 +29,6 @@ var ArticleService = (function () {
         var index = this.articles.indexOf(article);
         if (index > -1) {
             this.articles.splice(index, 1);
-        }
-        var index_user = this.UserArticle.indexOf(article);
-        if (index_user > -1) {
-            this.UserArticle.splice(index_user, 1);
         }
     };
     ArticleService.prototype.editArticle = function (article, currentArticle) {
@@ -43,11 +40,14 @@ var ArticleService = (function () {
             previewText: article.previewText,
             articleText: article.articleText,
             authorName: article.authorName,
+            publishDate: article.publishDate,
+            authorLogin: article.authorLogin,
             published: article.published
         };
     };
     ArticleService.prototype.publishArticle = function (article) {
         article.published = !article.published;
+        article.publishDate = "" + (new Date());
     };
     ArticleService.prototype.findArticle = function (id) {
         for (var i = 0; i < this.articles.length; i++) {

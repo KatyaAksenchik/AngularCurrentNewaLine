@@ -17,15 +17,18 @@ export class UserService {
         alert("Вы зарегистрировались!");
     }
 
-    setActiveUser(user: User) {
+    setActiveUser(user) {
         localStorage.setItem('ActiveUser', JSON.stringify(user));
-        alert("Look to Storage");
     }
 
     checkActiveUser() {
         return JSON.parse(localStorage.getItem('ActiveUser'));
     }
 
+    clearStorage() {
+        localStorage.setItem('ActiveUser', JSON.stringify({login: ""}));
+    }
+    
     checkIfUserExist(userModel) {
         let result;
         for (let i = 0; i < users.length; i++) {
@@ -43,7 +46,13 @@ export class UserService {
 
     }
 
-    clearStorage() {
-        localStorage.setItem('ActiveUser', JSON.stringify({login: ""}));
+
+    
+    displayEditButtons(currentArticle){
+        if(this.checkActiveUser().login==""){
+            return false;
+        } else if(this.checkActiveUser().login==currentArticle.authorLogin){
+            return true;
+        } else return false;
     }
 }

@@ -1,6 +1,6 @@
 <div class="wrapper">
     <!--<button (click)="push()"> click here !</button>-->
-    {{ here }}
+    <!--{{ here }}-->
 
     <article class="news-box-large" *ngFor="let article of (articles | published)">
         <div>
@@ -12,7 +12,7 @@
             </h2>
             <p class="news-add-info">
                 <span>{{article.authorName}}</span>
-                <time>24/01/2017</time>
+                <time>{{ article.publishDate | date:"dd/MM/yy" }}</time>
                 <span class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</span>
             </p>
             <p>

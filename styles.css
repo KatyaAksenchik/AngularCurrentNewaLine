@@ -112,8 +112,8 @@ footer .wrapper {
     /*display: none;*/
     z-index: 100;
     background-color: white;
-    right: 0%;
-    top: 87%;
+    right: -3px;
+    top: 88px;
 }
 
 .log-in-form {
@@ -339,7 +339,7 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
 }
 
 .tool-bar {
-    padding: 8.5px 7px;
+    padding: 5.5px 7px;
     border-top: solid 1px;
     height: 34px;
 }
@@ -376,7 +376,7 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     padding: 4px;
     border-radius: 5px;
     color: white;
-    background: #8f378f;
+    background: purple;
     box-shadow: 0px 2px 0px #4f274f;
     border: solid 1px black;
     text-transform: uppercase;
@@ -390,9 +390,13 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
 }
 
 .btn-styles:hover, .btn-styles:active {
-    background: purple;
+    background: #8f378f;
+    cursor: pointer;
 }
-
+.btn-styles:disabled{
+    background: #8f628e;
+    cursor: auto;
+}
 .registr-btn-style {
     width: 80%;
     margin: 10px 0;
@@ -417,6 +421,10 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
 .registration-field-box input[type="email"],
 .registration-field-box input[type="date"] {
     width: 65%;
+
+}
+.registration-field-box input[type="date"]{
+    color: #a9a9a9;
 }
 
 .form-divider {
