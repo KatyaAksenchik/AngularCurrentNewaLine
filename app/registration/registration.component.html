@@ -63,9 +63,12 @@
     <form  [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="registration-field-box">
             <label>Логин*</label>
-            <input type="text" placeholder="Логин" required id="login" formControlName="login">
+            <input type="text" placeholder="Логин" required id="login" formControlName="login" (keyup)="checkLogin()">
             <div *ngIf="formErrors.login" class="warning-style">
                 {{ formErrors.login }}
+            </div>
+            <div *ngIf="existed" class="warning-style">
+                Такой логин уже существует
             </div>
         </div>
 

@@ -21,7 +21,9 @@ var MainPageComponent = (function () {
     }
     ;
     MainPageComponent.prototype.ngOnInit = function () {
-        this.articles = this.articleService.articles;
+        for (var index = this.articleService.articles.length - 1; index >= 0; --index) {
+            this.articles.push(this.articleService.articles[index]);
+        }
     };
     return MainPageComponent;
 }());

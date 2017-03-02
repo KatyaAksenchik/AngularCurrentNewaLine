@@ -1,21 +1,44 @@
 /* This is our stylesheet */
 /*form styles*/
 
-.ng-valid[required], .ng-valid.required  {
-    border-bottom: 3px solid #0fa92e;
-}
 .ng-invalid:not(form)  {
     border-bottom: 3px solid #ec3f35;
 }
+
+.ng-valid[required], .ng-valid.required  {
+    border-bottom: 3px solid #0fa92e;
+}
+
+.log-in-form .ng-valid[required], .log-in-form .ng-valid.required{
+    border-bottom: initial;
+}
+.log-in-form .ng-invalid:not(form)  {
+    border-bottom: initial;
+}
+
 .text-bold{
     font-weight: 600;
 }
-
+.warning-message{
+    padding: 4px;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+}
 
 .warning-style{
     font-size: 14px;
     color: red;
 }
+/*.error{*/
+    /*border-bottom: 3px solid #ec3f35 !important;*/
+/*}*/
+/*.ok{*/
+    /*border-bottom: 3px solid #0fa92e !important;*/
+/*}*/
+
 .log-in-button{
     cursor: pointer;
 }

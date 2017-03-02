@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var article_service_1 = require("../shared/article.service");
-var user_service_1 = require("../shared/user.service");
-var router_1 = require("@angular/router");
-var router_2 = require("@angular/router");
+var core_1 = require('@angular/core');
+var article_service_1 = require('../shared/article.service');
+var user_service_1 = require('../shared/user.service');
+var router_1 = require('@angular/router');
+var router_2 = require('@angular/router');
 var NewsPageComponent = (function () {
     function NewsPageComponent(route, router, articleService, userService) {
         this.route = route;
@@ -48,14 +48,14 @@ var NewsPageComponent = (function () {
     NewsPageComponent.prototype.directToEdit = function () {
         this.router.navigate(['/editorPage', this.currentArticles.id]);
     };
+    NewsPageComponent = __decorate([
+        core_1.Component({
+            selector: 'newsPage',
+            templateUrl: './app/newsPage/newsPage.component.html'
+        }), 
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
+    ], NewsPageComponent);
     return NewsPageComponent;
 }());
-NewsPageComponent = __decorate([
-    core_1.Component({
-        selector: 'newsPage',
-        templateUrl: './app/newsPage/newsPage.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
-], NewsPageComponent);
 exports.NewsPageComponent = NewsPageComponent;
 //# sourceMappingURL=newsPage.component.js.map

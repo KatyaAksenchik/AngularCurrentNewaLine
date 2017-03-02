@@ -14,6 +14,7 @@ import { UserService } from '../shared/user.service';
 
 export class LogInComponent implements OnInit{
 
+    showError;
     model={
         userName: "",
         formValid: true,
@@ -69,6 +70,7 @@ export class LogInComponent implements OnInit{
                 showForm: true
             }
         }
+
     }
 
     logOut(){

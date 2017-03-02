@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Article} from '../shared/article';
 import { ArticleService } from '../shared/article.service';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
-import { PublishedPipe } from '../shared/published.pipe';
 
 
 @Component({
@@ -21,6 +19,8 @@ export class MainPageComponent implements OnInit{
     };
 
     ngOnInit(){
-        this.articles = this.articleService.articles;
+        for (let index = this.articleService.articles.length - 1; index >= 0; --index) {
+            this.articles.push(this.articleService.articles[index]);
+        }
     }
 }

@@ -3,7 +3,7 @@
         <h2>{{currentArticles.articleName}}</h2>
         <p class="news-lg-add-info">
             <span>{{currentArticles.authorName}}</span>
-            <span>24/01/17</span>
+            <span>{{ currentArticles.publishDate | date:"dd/MM/yy" }}</span>
         </p>
         <div class="text-center">
             <img class="news-main-pic" src="{{currentArticles.imgUrl}}"
@@ -58,27 +58,27 @@
         <div class="news-box-aside">
             <h3>Сегодня читают</h3>
             <ul class="news-list-aside">
-                <li>
+                <li *ngFor="let article ">
                     <a href="#">
                         Стали известны подробности о появлении 5G в Беларуси
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        Белорусам разрешили открывать электронные кошельки не выходя из дома
+                <!--<li>-->
+                    <!--<a href="#">-->
+                        <!--Белорусам разрешили открывать электронные кошельки не выходя из дома-->
 
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        Как изменилось население Беларуси за последние 120 лет. Инфографика
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        В Бобруйске появится свой хоккейный клуб
-                    </a>
-                </li>
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">-->
+                        <!--Как изменилось население Беларуси за последние 120 лет. Инфографика-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<a href="#">-->
+                        <!--В Бобруйске появится свой хоккейный клуб-->
+                    <!--</a>-->
+                <!--</li>-->
             </ul>
         </div>
 

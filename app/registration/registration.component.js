@@ -53,7 +53,7 @@ var RegistrationComponent = (function () {
         var _this = this;
         var emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
         this.registrationForm = this.formBuilder.group({
-            // "login": [this.newUser.login, [Validators.compose([Validators.required, this.checkLogin])]],
+            // "login": [this.newUser.login, Validators.required, this.checkLogin(this.registrationForm)],
             "login": [this.newUser.login, forms_1.Validators.required],
             "password": [this.newUser.password, [forms_1.Validators.required, forms_1.Validators.minLength(3)]
             ],
@@ -63,31 +63,23 @@ var RegistrationComponent = (function () {
             "birthday": [this.newUser.birthday],
             "phoneNumber": [this.newUser.phoneNumber]
         });
-        // , Validators.pattern(phoneRegex)
         this.registrationForm.valueChanges
             .subscribe(function (data) { return _this.onValueChanged(data); });
         this.onValueChanged();
     };
-    // checkLogin(control:FormControl):{[s:string]:boolean} {
-    //     for (let i = 0; i < this.users.length; i++) {
-    //             if (this.users[i].login == control.value)
-    //             {
-    //                 return { notExistedLogin: false};
-    //             }
-    //             else {
-    //                 null;
-    //             }
-    //     }
-    // }
-    // checkLogin(control) {
-    //     for (let i = 0; i < this.users.length; i++) {
-    //         if (this.users[i].login == control.value) {
-    //             return false;
-    //         }
-    //     }
-    //
-    //     return true;
-    // }
+    RegistrationComponent.prototype.checkLogin = function () {
+        for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].login == this.registrationForm.value.login) {
+                this.existed = true;
+                this.registrationForm.controls.login._status = "INVALID";
+                break;
+            }
+            else {
+                this.existed = false;
+            }
+        }
+        console.log(this.existed);
+    };
     RegistrationComponent.prototype.onValueChanged = function (data) {
         if (!this.registrationForm) {
             return;

@@ -26,6 +26,8 @@ export class NewsPageComponent implements OnInit{
         this.route.params.subscribe(params => {
             this.id = +params['id'];
         });
+
+        
         if(this.id==0){
             this.currentArticles=this.articleService.getTemporaryArticle();
         } else{
