@@ -21,6 +21,8 @@ var app_routing_module_1 = require("./app-routing.module");
 var user_service_1 = require("./shared/user.service");
 var published_pipe_1 = require("./shared/published.pipe");
 var user_article_pipe_1 = require("./shared/user.article.pipe");
+var category_pipe_1 = require("./shared/category.pipe");
+var reverse_pipe_1 = require("./shared/reverse.pipe");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -43,7 +45,9 @@ AppModule = __decorate([
             mainPage_component_1.MainPageComponent,
             logIn_component_1.LogInComponent,
             published_pipe_1.PublishedPipe,
-            user_article_pipe_1.UserArticlePipe
+            user_article_pipe_1.UserArticlePipe,
+            category_pipe_1.CategoryPipe,
+            reverse_pipe_1.ReversePipe
         ],
         providers: [article_service_1.ArticleService,
             user_service_1.UserService],

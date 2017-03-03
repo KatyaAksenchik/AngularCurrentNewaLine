@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var article_service_1 = require("../shared/article.service");
-var user_service_1 = require("../shared/user.service");
-var router_1 = require("@angular/router");
+var core_1 = require('@angular/core');
+var article_service_1 = require('../shared/article.service');
+var user_service_1 = require('../shared/user.service');
+var router_1 = require('@angular/router');
 var MainPageComponent = (function () {
     function MainPageComponent(route, articleService, userService) {
         this.route = route;
@@ -21,18 +21,16 @@ var MainPageComponent = (function () {
     }
     ;
     MainPageComponent.prototype.ngOnInit = function () {
-        for (var index = this.articleService.articles.length - 1; index >= 0; --index) {
-            this.articles.push(this.articleService.articles[index]);
-        }
+        this.articles = this.articleService.getArticles();
     };
+    MainPageComponent = __decorate([
+        core_1.Component({
+            selector: 'mainPage',
+            templateUrl: './app/mainPage/mainPage.component.html'
+        }), 
+        __metadata('design:paramtypes', [router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
+    ], MainPageComponent);
     return MainPageComponent;
 }());
-MainPageComponent = __decorate([
-    core_1.Component({
-        selector: 'mainPage',
-        templateUrl: './app/mainPage/mainPage.component.html'
-    }),
-    __metadata("design:paramtypes", [router_1.Router, article_service_1.ArticleService, user_service_1.UserService])
-], MainPageComponent);
 exports.MainPageComponent = MainPageComponent;
 //# sourceMappingURL=mainPage.component.js.map

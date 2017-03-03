@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {UserService} from "./shared/user.service";
 import {PublishedPipe} from "./shared/published.pipe";
 import {UserArticlePipe} from "./shared/user.article.pipe";
+import {CategoryPipe} from "./shared/category.pipe";
+import {ReversePipe} from "./shared/reverse.pipe";
 
 
 @NgModule({
@@ -27,8 +29,7 @@ import {UserArticlePipe} from "./shared/user.article.pipe";
         AppRoutingModule,
     ],
     declarations: [
-        AppComponent
-        ,
+        AppComponent,
         EditNewsComponent,
         RegistrationComponent,
         EditorPageComponent,
@@ -36,7 +37,9 @@ import {UserArticlePipe} from "./shared/user.article.pipe";
         MainPageComponent,
         LogInComponent,
         PublishedPipe,
-        UserArticlePipe
+        UserArticlePipe,
+        CategoryPipe,
+        ReversePipe
     ],
     providers: [ArticleService,
                 UserService],

@@ -53,7 +53,7 @@
     <aside class="editor-aside-block">
         <h2 class="registered-header">Мои новости:</h2>
         <div class="editor-news-block">
-            <editnews *ngFor="let article of (articles | userArticle: activeUser.login)" [article]="article" [currentArticle]="currentArticle"
+            <editnews *ngFor="let article of (articles | userArticle: activeUser.login | reverse)" [article]="article" [currentArticle]="currentArticle"
                       (changePublishState)="changePublishState($event)"
                       (edit)="edit($event)"
                       (direct)="direct($event)"

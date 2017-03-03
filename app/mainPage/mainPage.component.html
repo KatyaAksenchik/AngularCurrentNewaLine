@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <article class="news-box-large" *ngFor="let article of (articles | published)">
+    <article class="news-box-large" *ngFor="let article of (articles | reverse | published )">
         <div>
             <img src="{{article.imgUrl}}" alt="{{article.articleName}}" width="310" height="200">
         </div>

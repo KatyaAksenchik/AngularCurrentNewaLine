@@ -19,21 +19,22 @@ var NewsPageComponent = (function () {
         this.router = router;
         this.articleService = articleService;
         this.userService = userService;
-        // this.articles = [];
+        this.articles = [];
     }
     ;
     NewsPageComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.articles = this.articleService.getArticles();
         this.route.params.subscribe(function (params) {
             _this.id = +params['id'];
+            if (_this.id == 0) {
+                _this.currentArticles = _this.articleService.getTemporaryArticle();
+            }
+            else {
+                _this.currentArticles = _this.articleService.findArticle(_this.id);
+            }
+            _this.model = _this.userService.displayEditButtons(_this.currentArticles);
         });
-        if (this.id == 0) {
-            this.currentArticles = this.articleService.getTemporaryArticle();
-        }
-        else {
-            this.currentArticles = this.articleService.findArticle(this.id);
-        }
-        this.model = this.userService.displayEditButtons(this.currentArticles);
     };
     NewsPageComponent.prototype.deleteArticle = function () {
         this.router.navigate(['/mainPage']);

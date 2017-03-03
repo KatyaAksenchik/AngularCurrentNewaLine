@@ -15,25 +15,27 @@ import { Router } from '@angular/router';
 export class NewsPageComponent implements OnInit{
     private currentArticles;
     private id: number;
+    private articles;
 
     model:boolean;
 
     constructor(private route: ActivatedRoute,private router: Router, private articleService: ArticleService, private userService: UserService){
-        // this.articles = [];
+        this.articles = [];
     };
 
     ngOnInit(){
+        this.articles=this.articleService.getArticles();
+
         this.route.params.subscribe(params => {
             this.id = +params['id'];
+            if(this.id==0){
+                this.currentArticles=this.articleService.getTemporaryArticle();
+            } else{
+                this.currentArticles=this.articleService.findArticle(this.id);
+            }
+            this.model=this.userService.displayEditButtons(this.currentArticles);
         });
-
-        
-        if(this.id==0){
-            this.currentArticles=this.articleService.getTemporaryArticle();
-        } else{
-            this.currentArticles=this.articleService.findArticle(this.id);
-        }
-        this.model=this.userService.displayEditButtons(this.currentArticles);
+   
     }
     
     deleteArticle(){

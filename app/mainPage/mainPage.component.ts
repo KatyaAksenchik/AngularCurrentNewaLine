@@ -19,8 +19,6 @@ export class MainPageComponent implements OnInit{
     };
 
     ngOnInit(){
-        for (let index = this.articleService.articles.length - 1; index >= 0; --index) {
-            this.articles.push(this.articleService.articles[index]);
-        }
+         this.articles=this.articleService.getArticles()
     }
 }
