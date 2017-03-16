@@ -1,5 +1,4 @@
-
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
     name: "category",
@@ -7,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CategoryPipe implements PipeTransform {
-    transform(articles, category){
-        return articles.filter(article => article.tag.tag==category);
+    transform(articles, category) {
+        return articles.filter(article => article.tag.tag == category);
     }
 }

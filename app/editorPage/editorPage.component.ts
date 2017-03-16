@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
-import {Article} from '../shared/article';
 import {ArticleService} from '../shared/article.service';
 import {UserService} from '../shared/user.service';
-import {tags} from '../shared/data';
-import {Router} from '@angular/router';
-import {ActivatedRoute} from '@angular/router';
+
+import {Article} from '../shared/article';
+import {tags} from '../shared/extra.data'
 
 @Component({
     selector: 'editorPage',
@@ -14,76 +15,110 @@ import {ActivatedRoute} from '@angular/router';
 
 
 export class EditorPageComponent implements OnInit {
-
-    articles;
-    activeUser;
+    articles:[];
     currentArticle;
     tags = tags;
-    id:number;
+    activeUser;
     editState:string;
-
+    id:number;
 
     constructor(private route:ActivatedRoute, private router:Router, private articleService:ArticleService, private  userService:UserService) {
         this.articles = [];
     };
 
     ngOnInit() {
-        this.buildComponent()
+        this.buildComponent();
 
-        this.route.params.subscribe(params => {
-            this.id = +params['id'];
-        });
-        if (isNaN(this.id) == false) {
-            if (this.id !== 0) {
-                this.editState = "Редактирование новости";
-                this.currentArticle = this.articleService.findArticle(this.id);
+        this.route.params
+            .map(params => params['id'])
+            .switchMap(id => {
+                if (isNaN(id) == false) {
+                    if (id !== "0") {
+                        this.editState = "Редактирование новости";
+                        return this.articleService.getArticle(id);
+                    }
+                    else {
+                        return Observable.of(this.articleService.getTemporaryArticle());
+                    }
+                } else {
+                    return Observable.of(this.currentArticle);
+                }
+            })
+            .subscribe(article => {
+                this.currentArticle = article;
                 this.articleService.deleteArticle(this.currentArticle);
-            }
-            else {
-                this.currentArticle = this.articleService.getTemporaryArticle();
-            }
-        }
+            });
     }
 
     buildComponent() {
         this.editState = "Создание новости";
-        this.activeUser = this.userService.checkActiveUser();
-        this.articles = this.articleService.getArticles();
-        this.currentArticle = new Article(null, "", "", "", "", "", this.activeUser.userName, "" + (new Date()), this.activeUser.login);
+        this.activeUser = this.userService.checkActiveUser()[0];
+        this.articleService.getArticles().subscribe(articles => this.articles = articles);
+        this.currentArticle = new Article(null, "", "", "", "", "",
+            this.activeUser.userName, "" + (new Date()), this.activeUser.login);
     }
 
-
-    delete(article) {
-        this.articleService.deleteArticle(article);
-    }
-
-    changePublishState(article) {
-        this.articleService.publishArticle(article);
+    add(currentArticle) {
+        this.articleService.addArticle(currentArticle).subscribe(newArticle => this.articles.push(newArticle));
+        this.buildComponent();
     }
 
     addArticle(currentArticle) {
-        this.articleService.addArticle(currentArticle);
-        this.buildComponent();
+        currentArticle.published = false;
+        this.add(currentArticle);
+    }
+
+    publishArticle(currentArticle) {
+        currentArticle.published = true;
+        // this.addArticle(currentArticle);
+        this.add(currentArticle);
+    }
+
+    delete(article) {
+        this.articleService.deleteArticle(article).subscribe(res => {
+            let index = this.articles.indexOf(article);
+            if (index > -1) {
+                this.articles.splice(index, 1);
+            }
+        });
+    }
+
+    changePublishState(article) {
+        article.published = !article.published;
+        article.publishDate = "" + (new Date());
+
+        this.articleService.updateArticle(article).subscribe();
     }
 
     edit(article) {
         this.editState = "Редактирование новости";
-        this.currentArticle = this.articleService.editArticle(article, this.currentArticle);
-        this.articleService.deleteArticle(article);
+        this.currentArticle = {
+            id: article.id,
+            articleName: article.articleName,
+            imgUrl: article.imgUrl,
+            tag: article.tag,
+            previewText: article.previewText,
+            articleText: article.articleText,
+            authorName: article.authorName,
+            publishDate: article.publishDate,
+            authorLogin: article.authorLogin,
+            published: article.published
+        };
+        this.delete(article);
     }
 
     direct(article) {
         this.router.navigate(['/newsPage', article.id]);
     }
 
-    publishArticle(currentArticle) {
-        currentArticle.published = true;
-        this.addArticle(currentArticle);
-    }
-
     previewPage(currentArticle) {
         this.articleService.setTemporaryArticle(currentArticle);
         this.router.navigate(['/newsPage', 0]);
+    }
+
+    onChange(val) {
+        this.currentArticle.tag = JSON.parse(val);
+        this.selectedDevice = JSON.parse(val);
     }
 
 }

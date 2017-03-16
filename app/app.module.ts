@@ -2,6 +2,9 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule }    from '@angular/http';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+
 
 import { AppComponent } from './app.component';
 import { EditNewsComponent }  from './editNews/editNews.component';
@@ -10,7 +13,7 @@ import { RegistrationComponent }  from './registration/registration.component';
 import { NewsPageComponent }  from './newsPage/newsPage.component';
 import { MainPageComponent }  from './mainPage/mainPage.component';
 import {LogInComponent} from "./logIn/logIn.component";
-
+import {InMemoryDataService} from "./shared/data";
 
 import { ArticleService } from './shared/article.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +22,7 @@ import {PublishedPipe} from "./shared/published.pipe";
 import {UserArticlePipe} from "./shared/user.article.pipe";
 import {CategoryPipe} from "./shared/category.pipe";
 import {ReversePipe} from "./shared/reverse.pipe";
-
+import {AsideNewsComponent} from "./asideNews/asideNews.component";
 
 @NgModule({
     imports: [
@@ -27,6 +30,8 @@ import {ReversePipe} from "./shared/reverse.pipe";
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        HttpModule,
+        InMemoryWebApiModule.forRoot(InMemoryDataService)
     ],
     declarations: [
         AppComponent,
@@ -39,7 +44,8 @@ import {ReversePipe} from "./shared/reverse.pipe";
         PublishedPipe,
         UserArticlePipe,
         CategoryPipe,
-        ReversePipe
+        ReversePipe,
+        AsideNewsComponent
     ],
     providers: [ArticleService,
                 UserService],

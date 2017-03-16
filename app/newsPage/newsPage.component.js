@@ -8,55 +8,67 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var article_service_1 = require('../shared/article.service');
-var user_service_1 = require('../shared/user.service');
-var router_1 = require('@angular/router');
-var router_2 = require('@angular/router');
+Object.defineProperty(exports, "__esModule", { value: true });
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/switchMap");
+require("rxjs/add/observable/of");
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var article_1 = require("../shared/article");
+var article_service_1 = require("../shared/article.service");
+var user_service_1 = require("../shared/user.service");
+var router_2 = require("@angular/router");
 var NewsPageComponent = (function () {
-    function NewsPageComponent(route, router, articleService, userService) {
-        this.route = route;
-        this.router = router;
+    function NewsPageComponent(articleService, userService, route, router) {
         this.articleService = articleService;
         this.userService = userService;
-        this.articles = [];
+        this.route = route;
+        this.router = router;
     }
-    ;
     NewsPageComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.articles = this.articleService.getArticles();
-        this.route.params.subscribe(function (params) {
-            _this.id = +params['id'];
-            if (_this.id == 0) {
-                _this.currentArticles = _this.articleService.getTemporaryArticle();
+        this.article = new article_1.Article(null, "", "", "", "", "", "", "", "");
+        this.route.params
+            .map(function (params) { return params['id']; })
+            .switchMap(function (id) {
+            _this.id = id;
+            if (id !== "0") {
+                return _this.articleService.getArticle(id);
             }
             else {
-                _this.currentArticles = _this.articleService.findArticle(_this.id);
+                return Observable.of(_this.articleService.getTemporaryArticle());
             }
-            _this.model = _this.userService.displayEditButtons(_this.currentArticles);
+        })
+            .subscribe(function (article) {
+            _this.article = article;
+            _this.hiddenButton = _this.userService.displayEditButtons(article);
         });
     };
-    NewsPageComponent.prototype.deleteArticle = function () {
+    NewsPageComponent.prototype.deleteArticle = function (article) {
         this.router.navigate(['/mainPage']);
-        if (this.id !== 0) {
-            this.articleService.deleteArticle(this.currentArticles);
+        if (this.id !== "0") {
+            this.articleService.deleteArticle(article).subscribe(function (res) {
+                article = null;
+            });
         }
-        {
+        else {
             this.articleService.clearTemporaryArticle();
-            this.router.navigate(['/editorPage']);
         }
     };
     NewsPageComponent.prototype.directToEdit = function () {
-        this.router.navigate(['/editorPage', this.currentArticles.id]);
+        this.router.navigate(['/editorPage', this.article.id]);
     };
-    NewsPageComponent = __decorate([
-        core_1.Component({
-            selector: 'newsPage',
-            templateUrl: './app/newsPage/newsPage.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
-    ], NewsPageComponent);
     return NewsPageComponent;
 }());
+NewsPageComponent = __decorate([
+    core_1.Component({
+        selector: 'newsPage',
+        templateUrl: './app/newsPage/newsPage.component.html'
+    }),
+    __metadata("design:paramtypes", [article_service_1.ArticleService,
+        user_service_1.UserService,
+        router_1.ActivatedRoute,
+        router_2.Router])
+], NewsPageComponent);
 exports.NewsPageComponent = NewsPageComponent;
 //# sourceMappingURL=newsPage.component.js.map

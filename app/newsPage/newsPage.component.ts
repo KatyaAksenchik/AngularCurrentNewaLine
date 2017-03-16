@@ -1,55 +1,64 @@
-import {Component, OnInit} from '@angular/core';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of'
+
+import {Component, OnInit}      from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 import {Article} from '../shared/article';
-import { ArticleService } from '../shared/article.service';
-import { UserService } from '../shared/user.service';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-
+import {ArticleService} from '../shared/article.service';
+import {UserService} from '../shared/user.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'newsPage',
     templateUrl: './app/newsPage/newsPage.component.html'
 })
 
-export class NewsPageComponent implements OnInit{
-    private currentArticles;
-    private id: number;
-    private articles;
+export class NewsPageComponent implements OnInit {
+    article;
+    hiddenButton:boolean;
+    id:number;
 
-    model:boolean;
-
-    constructor(private route: ActivatedRoute,private router: Router, private articleService: ArticleService, private userService: UserService){
-        this.articles = [];
-    };
-
-    ngOnInit(){
-        this.articles=this.articleService.getArticles();
-
-        this.route.params.subscribe(params => {
-            this.id = +params['id'];
-            if(this.id==0){
-                this.currentArticles=this.articleService.getTemporaryArticle();
-            } else{
-                this.currentArticles=this.articleService.findArticle(this.id);
-            }
-            this.model=this.userService.displayEditButtons(this.currentArticles);
-        });
-   
+    constructor(private articleService:ArticleService,
+                private userService:UserService,
+                private route:ActivatedRoute,
+                private router:Router) {
     }
-    
-    deleteArticle(){
+
+    ngOnInit():void {
+        this.article = new Article(null, "", "", "", "", "","", "", "");
+
+        this.route.params
+            .map(params => params['id'])
+            .switchMap(id => {
+                this.id = id;
+                if (id !== "0") {
+                    return this.articleService.getArticle(id);
+                } else {
+                    return Observable.of(this.articleService.getTemporaryArticle());
+                }
+            })
+            .subscribe(article => {
+                this.article = article;
+                this.hiddenButton = this.userService.displayEditButtons(article);
+            });
+    }
+
+    deleteArticle(article) {
         this.router.navigate(['/mainPage']);
-        if(this.id!==0){
-            this.articleService.deleteArticle(this.currentArticles);
-        } {
+        if(this.id!=="0"){
+            this.articleService.deleteArticle(article).subscribe(res => {
+                article = null;
+            });
+        } else {
             this.articleService.clearTemporaryArticle();
-            this.router.navigate(['/editorPage']);
         }
+        
     }
 
-    directToEdit(){
-        this.router.navigate(['/editorPage', this.currentArticles.id]);
+    directToEdit() {
+        this.router.navigate(['/editorPage', this.article.id]);
     }
-    
+
 }

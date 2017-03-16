@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, bind} from '@angular/core';
 
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 // import { users } from '../shared/data';
 // import { User } from '../shared/user';
 
-import { UserService } from '../shared/user.service';
+import {UserService} from '../shared/user.service';
+import 'rxjs/Rx';
 
 
 @Component({
@@ -12,14 +13,21 @@ import { UserService } from '../shared/user.service';
     templateUrl: './app/logIn/logIn.component.html'
 })
 
-export class LogInComponent implements OnInit{
+export class LogInComponent implements OnInit {
 
     showError;
-    model={
+    model = {
         userName: "",
         formValid: true,
         showAddition: false,
         showForm: false
+    };
+
+    entranceModel = {
+        userName: "Войти",
+        formValid: false,
+        showAddition: false,
+        showForm: true
     };
 
     userModel = {
@@ -27,62 +35,61 @@ export class LogInComponent implements OnInit{
         password: ""
     };
 
-    constructor(private router: Router, private userService: UserService){
+
+    constructor(private router:Router, private userService:UserService) {
+        this.userService.emitLoginChange$.subscribe(
+            res => {
+                this.buildLogIn();
+            });
     };
 
-    ngOnInit(){
-        if(this.userService.checkActiveUser().login!==""){
-            this.model.userName=this.userService.checkActiveUser().login;
-            this.model.showAddition=true;
-        } else{
-            this.model.userName="Войти";
+    ngOnInit() {
+        this.buildLogIn();
+    }
+
+    buildLogIn() {
+        if (this.userService.checkActiveUser().login !== "") {
+            this.model.userName = this.userService.checkActiveUser()[0].login;
+            this.model.showAddition = true;
+        } else {
+            this.model.userName = "Войти";
         }
     }
 
-    openForm(){
-       this.model.showForm=!this.model.showForm;
+    openForm() {
+        this.model.showForm = !this.model.showForm;
     }
 
-    onSubmit(){
-        let validationResult=this.userService.checkIfUserExist(this.userModel);
-        
-        if (validationResult.userExist){
-            this.model={
-                userName: this.userModel.login,
-                formValid: true,
-                showForm: false,
-                showAddition: true
-            }
-            
-            this.userService.setActiveUser(validationResult.userInfo);
-            
-            this.userModel={
-                login: "",
-                password: ""
-            }
-            
-            
-        } else{
-            this.model={
-                userName: "Войти",
-                formValid: false,
-                showAddition: false,
-                showForm: true
-            }
-        }
-
+    toRegistrationPage() {
+        this.model.showForm = false;
+        this.router.navigate(['/registration']);
     }
 
-    logOut(){
+    onSubmit() {
+        this.userService.getUser(this.userModel).subscribe(
+            res => {
+                if (res.length > 0) {
+                    this.model = {
+                        userName: this.userModel.login,
+                        formValid: true,
+                        showForm: false,
+                        showAddition: true
+                    };
+                    this.userService.setActiveUser(res);
+
+                    this.userModel = {
+                        login: "",
+                        password: ""
+                    }
+                } else {
+                    this.model = this.entranceModel;
+                }
+            });
+    }
+
+    logOut() {
         this.userService.clearStorage();
-        this.model={
-            userName: "Войти",
-            formValid: false,
-            showAddition: false,
-            showForm: true
-        };
+        this.model = this.entranceModel;
         this.router.navigate(['/mainPage']);
     }
-
-    
 }

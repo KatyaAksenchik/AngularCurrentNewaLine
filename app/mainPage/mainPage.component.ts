@@ -19,6 +19,8 @@ export class MainPageComponent implements OnInit{
     };
 
     ngOnInit(){
-         this.articles=this.articleService.getArticles()
+        this.articleService.getArticles().subscribe(articles => {
+            this.articles = articles;
+        });
     }
 }

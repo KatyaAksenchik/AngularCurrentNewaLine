@@ -1,23 +1,18 @@
-<div class="wrapper flex-wrapper editor-flex-wrapper">
+<div *ngIf="currentArticle" class="wrapper flex-wrapper editor-flex-wrapper">
 
     <div class="editor-main-content">
         <h2 class="registered-header">{{editState}}</h2>
         <form class="registered-form" #editorForm="ngForm">
             <label>Название статьи:</label>
-            <input type="text" required name="articleName" [(ngModel)]="currentArticle.articleName" #articleName="ngModel">
+            <input type="text" required name="articleName" [(ngModel)]="currentArticle.articleName"
+                   #articleName="ngModel">
 
             <label>URL главной картинки:</label>
             <input type="text" name="imgUrl" [(ngModel)]="currentArticle.imgUrl" #imgUrl="ngModel">
 
             <label>Tag статьи:</label>
-            <select name="tag" [(ngModel)]="currentArticle.tag" #tag="ngModel">
-                <!--<option>Экономика</option>-->
-                <!--<option>Спорт</option>-->
-                <!--<option>Общество</option>-->
-                <option *ngFor="let tag of tags" [ngValue]="tag">
-                    {{tag.name}}
-                </option>
-
+            <select [ngModel]="currentArticle.tag | json" #tag="ngModel" name="tag" (ngModelChange)="onChange($event)">
+                <option [ngValue]="tag | json" *ngFor="let tag of tags">{{tag.name}}</option>
             </select>
 
             <label>Краткий текст статьи:</label>
@@ -28,36 +23,38 @@
             <label>Текст статьи:</label>
             <textarea name="articleText" [(ngModel)]="currentArticle.articleText" #articleText="ngModel"></textarea>
 
-            <div class="text-center" >
+            <div class="text-center">
 
-                <button class="btn-styles" type="submit" (click)="addArticle(currentArticle)"  [disabled]="!editorForm.form.valid">
+                <button class="btn-styles" type="submit" (click)="addArticle(currentArticle)"
+                        [disabled]="!editorForm.form.valid">
                     сохранить
                 </button>
                 <button class="btn-styles" data-operation="publishPage" type="submit"
                         [disabled]="!editorForm.form.valid"
-                        (click)="publishArticle(currentArticle)"  >
-                опубликовать
+                        (click)="publishArticle(currentArticle)">
+                    опубликовать
                 </button>
                 <button class="btn-styles" (click)="previewPage(currentArticle)"
                         [disabled]="!editorForm.form.valid"
                         type="submit">
-                посмотреть
+                    посмотреть
                 </button>
 
 
             </div>
         </form>
-        <!--{{ activeUser.login }}-->
     </div>
 
-    <aside class="editor-aside-block">
+    <aside *ngIf="articles" class="editor-aside-block">
         <h2 class="registered-header">Мои новости:</h2>
         <div class="editor-news-block">
-            <editnews *ngFor="let article of (articles | userArticle: activeUser.login | reverse)" [article]="article" [currentArticle]="currentArticle"
+            <editnews *ngFor="let article of (articles | userArticle: activeUser.login | reverse)" [article]="article"
+                      [currentArticle]="currentArticle"
                       (changePublishState)="changePublishState($event)"
                       (edit)="edit($event)"
                       (direct)="direct($event)"
                       (delete)="delete($event)">
+
             </editnews>
         </div>
     </aside>

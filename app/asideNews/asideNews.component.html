@@ -1,0 +1,25 @@
+<aside class="lg-news-aside-info">
+    <div class="news-box-aside">
+        <h3>Последние новости</h3>
+        <ul class="news-list-aside">
+            <li *ngFor="let article of (articles | published: slice:articles.length - 4)">
+                <a [routerLink]="['/newsPage', article.id]">
+                    {{ article.articleName }}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="text-center">
+        <img class="banner-img" src="images/bannerimg.jpg" alt="Курсы Минск">
+    </div>
+    <div class="news-box-aside">
+        <h3>Новости того же раздела</h3>
+        <ul class="news-list-aside">
+            <li *ngFor="let article of (articles | published | category: article.tag.tag | slice:articles.length - 4)">
+                <a [routerLink]="['/newsPage', article.id]">
+                    {{ article.articleName }}
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

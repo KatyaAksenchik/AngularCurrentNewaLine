@@ -1,7 +1,6 @@
 "use strict";
 var Article = (function () {
     function Article(id, articleName, imgUrl, tag, previewText, articleText, authorName, publishDate, authorLogin, published) {
-        if (published === void 0) { published = false; }
         this.id = id;
         this.articleName = articleName;
         this.imgUrl = imgUrl;

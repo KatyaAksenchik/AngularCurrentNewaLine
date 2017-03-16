@@ -271,9 +271,10 @@ footer .wrapper {
     margin-right: 7px;
     font-size: 14px;
 }
-
-.lg-news-aside-info {
+asidenews{
     width: 30%;
+}
+.lg-news-aside-info {
     padding: 20px 15px;
 }
 

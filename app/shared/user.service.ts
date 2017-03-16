@@ -1,20 +1,65 @@
-import  {users} from './data';
+import {Injectable} from '@angular/core';
+import {Http, Headers, RequestOptions, URLSearchParams} from '@angular/http';
+import {Subject}    from 'rxjs/Subject';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 import  {User} from './user';
 
 
+@Injectable()
 export class UserService {
-    users = users;
+
+    private apiUrl = 'api/users';
+    activeUser = {};
+
+
+    constructor(private http:Http) {
+    }
 
     getUsers() {
-        return this.users;
+        return this.http.get(this.apiUrl)
+            .map(res => res.json().data)
+            .catch(this.handleError)
+    }
+
+    getUser(param) {
+        let params:URLSearchParams = new URLSearchParams();
+
+        for (var key in param) {
+            if (param.hasOwnProperty(key)) {
+                let val = param[key];
+                params.set(key, val);
+            }
+        }
+        let headers = new Headers({'Content-Type': 'aplication/json'});
+        let options = new RequestOptions({headers, search: params});
+
+        return this.http
+            .get(this.apiUrl, options)
+            .map(res => res.json().data)
+            .catch(this.handleError)
     }
 
     addUser(user) {
+
+        let headers = new Headers({'Content-Type': 'aplication/json'});
+        let options = new RequestOptions({headers});
+
         let newUser:User = new User(user.login, user.password, user.email,
             user.userName, user.birthday, user.phoneNumber);
-        users.push(newUser);
-        this.setActiveUser(newUser);
-        alert("Вы зарегистрировались!");
+
+        return this.http.post(this.apiUrl, newUser, options)
+            .map(res => res.json().data)
+            .catch(this.handleError)
+    }
+
+    private handleError(error) {
+        console.error('Ошибка', error);
+        return Observable.throw(error.message || error)
     }
 
     setActiveUser(user) {
@@ -22,37 +67,29 @@ export class UserService {
     }
 
     checkActiveUser() {
-        return JSON.parse(localStorage.getItem('ActiveUser'));
+        return JSON.parse(localStorage.getItem('ActiveUser'))
     }
 
     clearStorage() {
         localStorage.setItem('ActiveUser', JSON.stringify({login: ""}));
     }
-    
-    checkIfUserExist(userModel) {
-        let result;
-        for (let i = 0; i < users.length; i++) {
-            if (userModel.login == users[i].login && userModel.password == users[i].password) {
-                result = {
-                    userInfo: users[i],
-                    userExist: true
-                };
-                break;
-            } else {
-                result = {userExist: false};
-            }
-        }
-        return result;
-
-    }
 
 
-    
-    displayEditButtons(currentArticle){
-        if(this.checkActiveUser().login==""){
+    displayEditButtons(currentArticle) {
+        let user = this.checkActiveUser()[0];
+        if (user.login == "") {
             return false;
-        } else if(this.checkActiveUser().login==currentArticle.authorLogin){
+        } else if (user.login == currentArticle.authorLogin) {
             return true;
         } else return false;
     }
+
+    private emitLoginChange = new Subject();
+    emitLoginChange$ = this.emitLoginChange.asObservable();
+
+    emitChange() {
+        this.emitLoginChange.next();
+    }
+
 }
+

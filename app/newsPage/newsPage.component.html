@@ -1,55 +1,27 @@
-<div class="wrapper flex-wrapper whole-news-flex">
+<div *ngIf="article" class="wrapper flex-wrapper whole-news-flex">
     <div class="news-main-content">
-        <h2>{{currentArticles.articleName}}</h2>
+        <h2>{{article.articleName}}</h2>
         <p class="news-lg-add-info">
-            <span>{{currentArticles.authorName}}</span>
-            <span>{{ currentArticles.publishDate | date:"dd/MM/yy" }}</span>
+            <span>{{article.authorName}}</span>
+            <span>{{ article.publishDate | date:"dd/MM/yy" }}</span>
         </p>
         <div class="text-center">
-            <img class="news-main-pic" src="{{currentArticles.imgUrl}}"
-                 alt="{{currentArticles.articleName}}"
+            <img class="news-main-pic" src="{{article.imgUrl}}"
+                 alt="{{article.articleName}}"
                  width="380" height="214">
         </div>
         <div class="lg-news-text-content">
-            <p class="text-bold">{{currentArticles.previewText}}</p>
-            <p>{{currentArticles.articleText}}</p>
+            <p class="text-bold">{{article.previewText}}</p>
+            <p>{{article.articleText}}</p>
         </div>
-
-        <!--*ngIf="activeUser"-->
-        <div class="text-center" *ngIf="model">
+        <div class="text-center" *ngIf="hiddenButton">
             <button class="btn-styles" (click)="directToEdit()">
                 редактировать
             </button>
-            <button class="btn-styles" (click)="deleteArticle()">
+            <button class="btn-styles" (click)="deleteArticle(article)">
                 удалить
             </button>
         </div>
     </div>
-    <aside class="lg-news-aside-info">
-        <div class="news-box-aside">
-            <h3>Последние новости</h3>
-            <!--<div *ngIf="articles.length>4">-->
-            <ul class="news-list-aside">
-                <li *ngFor="let article of (articles | published: slice:articles.length - 4)">
-                    <a [routerLink]="['/newsPage', article.id]">
-                        {{ article.articleName }}
-                    </a>
-                </li>
-            </ul>
-            <!--</div>-->
-        </div>
-        <div class="text-center">
-            <img class="banner-img" src="images/bannerimg.jpg" alt="Курсы Минск">
-        </div>
-        <div class="news-box-aside">
-            <h3>Новости того же раздела</h3>
-            <ul class="news-list-aside">
-                <li *ngFor="let article of (articles | published | category: currentArticles.tag.tag | slice:articles.length - 4)">
-                    <a [routerLink]="['/newsPage', article.id]">
-                        {{ article.articleName }}
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
+    <asidenews [article]="article" ></asidenews>
 </div>

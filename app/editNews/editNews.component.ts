@@ -8,7 +8,7 @@ import { Article } from '../shared/article';
 })
 
 export class EditNewsComponent {
- 
+
     @Input() article:Article;
     @Input() currentArticle:Article;
 
