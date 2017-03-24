@@ -1,8 +1,7 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var root_1 = require("./util/root");
-var toSubscriber_1 = require("./util/toSubscriber");
-var observable_1 = require("./symbol/observable");
+var root_1 = require('./util/root');
+var toSubscriber_1 = require('./util/toSubscriber');
+var observable_1 = require('./symbol/observable');
 /**
  * A representation of any set of values over any amount of time. This the most basic building block
  * of RxJS.
@@ -122,20 +121,20 @@ var Observable = (function () {
     Observable.prototype[observable_1.$$observable] = function () {
         return this;
     };
+    // HACK: Since TypeScript inherits static properties too, we have to
+    // fight against TypeScript here so Subject can have a different static create signature
+    /**
+     * Creates a new cold Observable by calling the Observable constructor
+     * @static true
+     * @owner Observable
+     * @method create
+     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+     * @return {Observable} a new cold observable
+     */
+    Observable.create = function (subscribe) {
+        return new Observable(subscribe);
+    };
     return Observable;
 }());
-// HACK: Since TypeScript inherits static properties too, we have to
-// fight against TypeScript here so Subject can have a different static create signature
-/**
- * Creates a new cold Observable by calling the Observable constructor
- * @static true
- * @owner Observable
- * @method create
- * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
- * @return {Observable} a new cold observable
- */
-Observable.create = function (subscribe) {
-    return new Observable(subscribe);
-};
 exports.Observable = Observable;
 //# sourceMappingURL=Observable.js.map

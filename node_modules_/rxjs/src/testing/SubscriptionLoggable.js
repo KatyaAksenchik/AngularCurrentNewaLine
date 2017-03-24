@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var SubscriptionLog_1 = require("./SubscriptionLog");
+var SubscriptionLog_1 = require('./SubscriptionLog');
 var SubscriptionLoggable = (function () {
     function SubscriptionLoggable() {
         this.subscriptions = [];

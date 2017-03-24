@@ -1,11 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var isArray_1 = require("./util/isArray");
-var isObject_1 = require("./util/isObject");
-var isFunction_1 = require("./util/isFunction");
-var tryCatch_1 = require("./util/tryCatch");
-var errorObject_1 = require("./util/errorObject");
-var UnsubscriptionError_1 = require("./util/UnsubscriptionError");
+var isArray_1 = require('./util/isArray');
+var isObject_1 = require('./util/isObject');
+var isFunction_1 = require('./util/isFunction');
+var tryCatch_1 = require('./util/tryCatch');
+var errorObject_1 = require('./util/errorObject');
+var UnsubscriptionError_1 = require('./util/UnsubscriptionError');
 /**
  * Represents a disposable resource, such as the execution of an Observable. A
  * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -144,11 +143,11 @@ var Subscription = (function () {
             }
         }
     };
+    Subscription.EMPTY = (function (empty) {
+        empty.closed = true;
+        return empty;
+    }(new Subscription()));
     return Subscription;
 }());
-Subscription.EMPTY = (function (empty) {
-    empty.closed = true;
-    return empty;
-}(new Subscription()));
 exports.Subscription = Subscription;
 //# sourceMappingURL=Subscription.js.map

@@ -21,6 +21,7 @@ import {UserService} from "./shared/user.service";
 import {PublishedPipe} from "./shared/published.pipe";
 import {UserArticlePipe} from "./shared/user.article.pipe";
 import {CategoryPipe} from "./shared/category.pipe";
+import {NotCategoryPipe} from "./shared/not.category.pipe";
 import {ReversePipe} from "./shared/reverse.pipe";
 import {AsideNewsComponent} from "./asideNews/asideNews.component";
 
@@ -45,7 +46,8 @@ import {AsideNewsComponent} from "./asideNews/asideNews.component";
         UserArticlePipe,
         CategoryPipe,
         ReversePipe,
-        AsideNewsComponent
+        AsideNewsComponent,
+        NotCategoryPipe
     ],
     providers: [ArticleService,
                 UserService],

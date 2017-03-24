@@ -1,16 +1,10 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var Subscriber_1 = require("../Subscriber");
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = require('../Subscriber');
 /**
  * Applies an accumulator function over the source Observable, and returns the
  * accumulated result when the source completes, given an optional seed value.
@@ -79,13 +73,12 @@ exports.ReduceOperator = ReduceOperator;
 var ReduceSubscriber = (function (_super) {
     __extends(ReduceSubscriber, _super);
     function ReduceSubscriber(destination, accumulator, seed) {
-        var _this = _super.call(this, destination) || this;
-        _this.accumulator = accumulator;
-        _this.hasValue = false;
-        _this.acc = seed;
-        _this.accumulator = accumulator;
-        _this.hasSeed = typeof seed !== 'undefined';
-        return _this;
+        _super.call(this, destination);
+        this.accumulator = accumulator;
+        this.hasValue = false;
+        this.acc = seed;
+        this.accumulator = accumulator;
+        this.hasSeed = typeof seed !== 'undefined';
     }
     ReduceSubscriber.prototype._next = function (value) {
         if (this.hasValue || (this.hasValue = this.hasSeed)) {

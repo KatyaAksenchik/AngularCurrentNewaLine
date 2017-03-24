@@ -70,7 +70,6 @@ export class EditorPageComponent implements OnInit {
 
     publishArticle(currentArticle) {
         currentArticle.published = true;
-        // this.addArticle(currentArticle);
         this.add(currentArticle);
     }
 

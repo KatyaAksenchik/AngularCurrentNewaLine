@@ -71,7 +71,7 @@ export class UserService {
     }
 
     clearStorage() {
-        localStorage.setItem('ActiveUser', JSON.stringify({login: ""}));
+        localStorage.setItem('ActiveUser', JSON.stringify([{login: ""}]));
     }
 
 

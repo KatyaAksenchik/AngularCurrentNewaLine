@@ -8,17 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-// import { users } from '../shared/data';
-// import { User } from '../shared/user';
-var user_service_1 = require('../shared/user.service');
-require('rxjs/Rx');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var user_service_1 = require("../shared/user.service");
+require("rxjs/Rx");
 var LogInComponent = (function () {
     function LogInComponent(router, userService) {
         var _this = this;
         this.router = router;
         this.userService = userService;
+        this.showError = false;
         this.model = {
             userName: "",
             formValid: true,
@@ -44,7 +44,7 @@ var LogInComponent = (function () {
         this.buildLogIn();
     };
     LogInComponent.prototype.buildLogIn = function () {
-        if (this.userService.checkActiveUser().login !== "") {
+        if (this.userService.checkActiveUser()[0].login !== "") {
             this.model.userName = this.userService.checkActiveUser()[0].login;
             this.model.showAddition = true;
         }
@@ -58,6 +58,9 @@ var LogInComponent = (function () {
     LogInComponent.prototype.toRegistrationPage = function () {
         this.model.showForm = false;
         this.router.navigate(['/registration']);
+    };
+    LogInComponent.prototype.hidemsg = function () {
+        this.showError = false;
     };
     LogInComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -77,22 +80,28 @@ var LogInComponent = (function () {
             }
             else {
                 _this.model = _this.entranceModel;
+                _this.showError = true;
             }
         });
     };
     LogInComponent.prototype.logOut = function () {
         this.userService.clearStorage();
-        this.model = this.entranceModel;
+        this.model = {
+            userName: "Войти",
+            formValid: false,
+            showAddition: false,
+            showForm: true
+        };
         this.router.navigate(['/mainPage']);
     };
-    LogInComponent = __decorate([
-        core_1.Component({
-            selector: 'logIn',
-            templateUrl: './app/logIn/logIn.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
-    ], LogInComponent);
     return LogInComponent;
 }());
+LogInComponent = __decorate([
+    core_1.Component({
+        selector: 'logIn',
+        templateUrl: './app/logIn/logIn.component.html'
+    }),
+    __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService])
+], LogInComponent);
 exports.LogInComponent = LogInComponent;
 //# sourceMappingURL=logIn.component.js.map

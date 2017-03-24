@@ -73,6 +73,51 @@ export class InMemoryDataService implements InMemoryDbService {
                 publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
                 authorLogin: "ivanov",
                 published: true
+            },
+            {
+                id: 5,
+                articleName: "Маленькая новость",
+                imgUrl: "images/weather.jpg",
+                tag: {
+                    name: "Общество",
+                    tag: "society"
+                },
+                previewText: "бла-бла",
+                articleText: `Бла-бла`,
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
+                published: true
+            },
+            {
+                id: 6,
+                articleName: "Дональд Трамп вступил в должность 45-го президента США",
+                imgUrl: "images/trump.jpg",
+                tag: {
+                    name: "Политика",
+                    tag: "politics"
+                },
+                previewText: "бла-бла",
+                articleText: `Бла-бла`,
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
+                published: true
+            },
+            {
+                id: 7,
+                articleName: "Индия измерит Эверест после землетрясения в Непале",
+                imgUrl: "images/everest.jpg",
+                tag: {
+                    name: "Общество",
+                    tag: "society"
+                },
+                previewText: "бла-бла",
+                articleText: `Бла-бла`,
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
+                published: true
             }
         ];
 

@@ -1,9 +1,6 @@
 import {Component, OnInit, bind} from '@angular/core';
 
 import {Router} from '@angular/router';
-// import { users } from '../shared/data';
-// import { User } from '../shared/user';
-
 import {UserService} from '../shared/user.service';
 import 'rxjs/Rx';
 
@@ -15,7 +12,7 @@ import 'rxjs/Rx';
 
 export class LogInComponent implements OnInit {
 
-    showError;
+    showError: boolean = false;
     model = {
         userName: "",
         formValid: true,
@@ -48,7 +45,7 @@ export class LogInComponent implements OnInit {
     }
 
     buildLogIn() {
-        if (this.userService.checkActiveUser().login !== "") {
+        if (this.userService.checkActiveUser()[0].login !== "") {
             this.model.userName = this.userService.checkActiveUser()[0].login;
             this.model.showAddition = true;
         } else {
@@ -65,6 +62,10 @@ export class LogInComponent implements OnInit {
         this.router.navigate(['/registration']);
     }
 
+    hidemsg(){
+        this.showError = false;
+    }
+
     onSubmit() {
         this.userService.getUser(this.userModel).subscribe(
             res => {
@@ -75,6 +76,7 @@ export class LogInComponent implements OnInit {
                         showForm: false,
                         showAddition: true
                     };
+
                     this.userService.setActiveUser(res);
 
                     this.userModel = {
@@ -83,13 +85,19 @@ export class LogInComponent implements OnInit {
                     }
                 } else {
                     this.model = this.entranceModel;
+                    this.showError = true;
                 }
             });
     }
 
     logOut() {
         this.userService.clearStorage();
-        this.model = this.entranceModel;
+        this.model = {
+            userName: "Войти",
+            formValid: false,
+            showAddition: false,
+            showForm: true
+        };
         this.router.navigate(['/mainPage']);
     }
 }

@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var find_1 = require("./find");
+var find_1 = require('./find');
 /**
  * Emits only the index of the first value emitted by the source Observable that
  * meets some condition.

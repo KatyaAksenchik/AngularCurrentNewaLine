@@ -1,25 +1,19 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var isArray_1 = require("../util/isArray");
-var isPromise_1 = require("../util/isPromise");
-var PromiseObservable_1 = require("./PromiseObservable");
-var IteratorObservable_1 = require("./IteratorObservable");
-var ArrayObservable_1 = require("./ArrayObservable");
-var ArrayLikeObservable_1 = require("./ArrayLikeObservable");
-var iterator_1 = require("../symbol/iterator");
-var Observable_1 = require("../Observable");
-var observeOn_1 = require("../operator/observeOn");
-var observable_1 = require("../symbol/observable");
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isArray_1 = require('../util/isArray');
+var isPromise_1 = require('../util/isPromise');
+var PromiseObservable_1 = require('./PromiseObservable');
+var IteratorObservable_1 = require('./IteratorObservable');
+var ArrayObservable_1 = require('./ArrayObservable');
+var ArrayLikeObservable_1 = require('./ArrayLikeObservable');
+var iterator_1 = require('../symbol/iterator');
+var Observable_1 = require('../Observable');
+var observeOn_1 = require('../operator/observeOn');
+var observable_1 = require('../symbol/observable');
 var isArrayLike = (function (x) { return x && typeof x.length === 'number'; });
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -29,10 +23,9 @@ var isArrayLike = (function (x) { return x && typeof x.length === 'number'; });
 var FromObservable = (function (_super) {
     __extends(FromObservable, _super);
     function FromObservable(ish, scheduler) {
-        var _this = _super.call(this, null) || this;
-        _this.ish = ish;
-        _this.scheduler = scheduler;
-        return _this;
+        _super.call(this, null);
+        this.ish = ish;
+        this.scheduler = scheduler;
     }
     /**
      * Creates an Observable from an Array, an array-like object, a Promise, an

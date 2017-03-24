@@ -2,7 +2,7 @@
     <div class="news-box-aside">
         <h3>Последние новости</h3>
         <ul class="news-list-aside">
-            <li *ngFor="let article of (articles | published: slice:articles.length - 4)">
+            <li *ngFor="let article of (articles | published | notcategory: article.tag.tag | reverse | slice: 0:4)">
                 <a [routerLink]="['/newsPage', article.id]">
                     {{ article.articleName }}
                 </a>
@@ -15,7 +15,7 @@
     <div class="news-box-aside">
         <h3>Новости того же раздела</h3>
         <ul class="news-list-aside">
-            <li *ngFor="let article of (articles | published | category: article.tag.tag | slice:articles.length - 4)">
+            <li *ngFor="let article of (articles | published | category: article.tag.tag | reverse | slice:0:4 )">
                 <a [routerLink]="['/newsPage', article.id]">
                     {{ article.articleName }}
                 </a>

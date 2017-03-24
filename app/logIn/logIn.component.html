@@ -10,15 +10,16 @@
     <!--*ngIf="model.formValid-->
     <div *ngIf="!model.showAddition">
         <form class="log-in-form" (ngSubmit)="onSubmit()" #logInForm="ngForm">
-            <p *ngIf="!model.formValid " class="warning-message">
+            <p *ngIf="showError" class="warning-message">
                 Пароль или логин не верный
             </p>
             <input type="text" placeholder="Логин"
                    name="login" #login="ngModel"
-                   [(ngModel)]="userModel.login" required>
+                   [(ngModel)]="userModel.login" required (keyup)="hidemsg()">
             <input type="password"
                    name="password" #password="ngModel"
                    [(ngModel)]="userModel.password" placeholder="Пароль"
+                   (keyup)="hidemsg()"
                    required>
             <div class="text-center">
                 <button type="submit" class="btn-styles" id="log-in-entance-button" [disabled]="logInForm.invalid">

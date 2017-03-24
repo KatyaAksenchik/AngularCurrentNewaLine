@@ -8,8 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var article_1 = require('../shared/article');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var article_1 = require("../shared/article");
 var EditNewsComponent = (function () {
     function EditNewsComponent() {
         this.delete = new core_1.EventEmitter();
@@ -29,38 +30,37 @@ var EditNewsComponent = (function () {
     EditNewsComponent.prototype.onRedirectToNewsPage = function () {
         this.direct.emit(this.article);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', article_1.Article)
-    ], EditNewsComponent.prototype, "article", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', article_1.Article)
-    ], EditNewsComponent.prototype, "currentArticle", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], EditNewsComponent.prototype, "delete", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], EditNewsComponent.prototype, "changePublishState", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], EditNewsComponent.prototype, "edit", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], EditNewsComponent.prototype, "direct", void 0);
-    EditNewsComponent = __decorate([
-        core_1.Component({
-            selector: 'editnews',
-            templateUrl: './app/editNews/editNews.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], EditNewsComponent);
     return EditNewsComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", article_1.Article)
+], EditNewsComponent.prototype, "article", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", article_1.Article)
+], EditNewsComponent.prototype, "currentArticle", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditNewsComponent.prototype, "delete", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditNewsComponent.prototype, "changePublishState", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditNewsComponent.prototype, "edit", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], EditNewsComponent.prototype, "direct", void 0);
+EditNewsComponent = __decorate([
+    core_1.Component({
+        selector: 'editnews',
+        templateUrl: './app/editNews/editNews.component.html'
+    })
+], EditNewsComponent);
 exports.EditNewsComponent = EditNewsComponent;
 //# sourceMappingURL=editNews.component.js.map

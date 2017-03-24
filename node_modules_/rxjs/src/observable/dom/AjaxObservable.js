@@ -1,21 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var root_1 = require("../../util/root");
-var tryCatch_1 = require("../../util/tryCatch");
-var errorObject_1 = require("../../util/errorObject");
-var Observable_1 = require("../../Observable");
-var Subscriber_1 = require("../../Subscriber");
-var map_1 = require("../../operator/map");
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var root_1 = require('../../util/root');
+var tryCatch_1 = require('../../util/tryCatch');
+var errorObject_1 = require('../../util/errorObject');
+var Observable_1 = require('../../Observable');
+var Subscriber_1 = require('../../Subscriber');
+var map_1 = require('../../operator/map');
 function getCORSRequest() {
     if (root_1.root.XMLHttpRequest) {
         var xhr = new root_1.root.XMLHttpRequest();
@@ -47,7 +41,6 @@ function getXMLHttpRequest() {
                     }
                 }
                 catch (e) {
-                    //suppress exceptions
                 }
             }
             return new root_1.root.ActiveXObject(progId);
@@ -92,7 +85,7 @@ exports.ajaxGetJSON = ajaxGetJSON;
 var AjaxObservable = (function (_super) {
     __extends(AjaxObservable, _super);
     function AjaxObservable(urlOrRequest) {
-        var _this = _super.call(this) || this;
+        _super.call(this);
         var request = {
             async: true,
             createXHR: function () {
@@ -115,51 +108,50 @@ var AjaxObservable = (function (_super) {
                 }
             }
         }
-        _this.request = request;
-        return _this;
+        this.request = request;
     }
     AjaxObservable.prototype._subscribe = function (subscriber) {
         return new AjaxSubscriber(subscriber, this.request);
     };
+    /**
+     * Creates an observable for an Ajax request with either a request object with
+     * url, headers, etc or a string for a URL.
+     *
+     * @example
+     * source = Rx.Observable.ajax('/products');
+     * source = Rx.Observable.ajax({ url: 'products', method: 'GET' });
+     *
+     * @param {string|Object} request Can be one of the following:
+     *   A string of the URL to make the Ajax call.
+     *   An object with the following properties
+     *   - url: URL of the request
+     *   - body: The body of the request
+     *   - method: Method of the request, such as GET, POST, PUT, PATCH, DELETE
+     *   - async: Whether the request is async
+     *   - headers: Optional headers
+     *   - crossDomain: true if a cross domain request, else false
+     *   - createXHR: a function to override if you need to use an alternate
+     *   XMLHttpRequest implementation.
+     *   - resultSelector: a function to use to alter the output value type of
+     *   the Observable. Gets {@link AjaxResponse} as an argument.
+     * @return {Observable} An observable sequence containing the XMLHttpRequest.
+     * @static true
+     * @name ajax
+     * @owner Observable
+    */
+    AjaxObservable.create = (function () {
+        var create = function (urlOrRequest) {
+            return new AjaxObservable(urlOrRequest);
+        };
+        create.get = ajaxGet;
+        create.post = ajaxPost;
+        create.delete = ajaxDelete;
+        create.put = ajaxPut;
+        create.getJSON = ajaxGetJSON;
+        return create;
+    })();
     return AjaxObservable;
 }(Observable_1.Observable));
-/**
- * Creates an observable for an Ajax request with either a request object with
- * url, headers, etc or a string for a URL.
- *
- * @example
- * source = Rx.Observable.ajax('/products');
- * source = Rx.Observable.ajax({ url: 'products', method: 'GET' });
- *
- * @param {string|Object} request Can be one of the following:
- *   A string of the URL to make the Ajax call.
- *   An object with the following properties
- *   - url: URL of the request
- *   - body: The body of the request
- *   - method: Method of the request, such as GET, POST, PUT, PATCH, DELETE
- *   - async: Whether the request is async
- *   - headers: Optional headers
- *   - crossDomain: true if a cross domain request, else false
- *   - createXHR: a function to override if you need to use an alternate
- *   XMLHttpRequest implementation.
- *   - resultSelector: a function to use to alter the output value type of
- *   the Observable. Gets {@link AjaxResponse} as an argument.
- * @return {Observable} An observable sequence containing the XMLHttpRequest.
- * @static true
- * @name ajax
- * @owner Observable
-*/
-AjaxObservable.create = (function () {
-    var create = function (urlOrRequest) {
-        return new AjaxObservable(urlOrRequest);
-    };
-    create.get = ajaxGet;
-    create.post = ajaxPost;
-    create.delete = ajaxDelete;
-    create.put = ajaxPut;
-    create.getJSON = ajaxGetJSON;
-    return create;
-})();
 exports.AjaxObservable = AjaxObservable;
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -169,9 +161,9 @@ exports.AjaxObservable = AjaxObservable;
 var AjaxSubscriber = (function (_super) {
     __extends(AjaxSubscriber, _super);
     function AjaxSubscriber(destination, request) {
-        var _this = _super.call(this, destination) || this;
-        _this.request = request;
-        _this.done = false;
+        _super.call(this, destination);
+        this.request = request;
+        this.done = false;
         var headers = request.headers = request.headers || {};
         // force CORS if requested
         if (!request.crossDomain && !headers['X-Requested-With']) {
@@ -182,9 +174,8 @@ var AjaxSubscriber = (function (_super) {
             headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
         }
         // properly serialize body
-        request.body = _this.serializeBody(request.body, request.headers['Content-Type']);
-        _this.send();
-        return _this;
+        request.body = this.serializeBody(request.body, request.headers['Content-Type']);
+        this.send();
     }
     AjaxSubscriber.prototype.next = function (e) {
         this.done = true;
@@ -245,7 +236,7 @@ var AjaxSubscriber = (function (_super) {
         }
         switch (contentType) {
             case 'application/x-www-form-urlencoded':
-                return Object.keys(body).map(function (key) { return encodeURI(key) + "=" + encodeURI(body[key]); }).join('&');
+                return Object.keys(body).map(function (key) { return (encodeURI(key) + "=" + encodeURI(body[key])); }).join('&');
             case 'application/json':
                 return JSON.stringify(body);
             default:
@@ -377,12 +368,11 @@ exports.AjaxResponse = AjaxResponse;
 var AjaxError = (function (_super) {
     __extends(AjaxError, _super);
     function AjaxError(message, xhr, request) {
-        var _this = _super.call(this, message) || this;
-        _this.message = message;
-        _this.xhr = xhr;
-        _this.request = request;
-        _this.status = xhr.status;
-        return _this;
+        _super.call(this, message);
+        this.message = message;
+        this.xhr = xhr;
+        this.request = request;
+        this.status = xhr.status;
     }
     return AjaxError;
 }(Error));
@@ -395,7 +385,7 @@ exports.AjaxError = AjaxError;
 var AjaxTimeoutError = (function (_super) {
     __extends(AjaxTimeoutError, _super);
     function AjaxTimeoutError(xhr, request) {
-        return _super.call(this, 'ajax timeout', xhr, request) || this;
+        _super.call(this, 'ajax timeout', xhr, request);
     }
     return AjaxTimeoutError;
 }(AjaxError));

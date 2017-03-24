@@ -1,8 +1,7 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var ArrayObservable_1 = require("../observable/ArrayObservable");
-var mergeAll_1 = require("./mergeAll");
-var isScheduler_1 = require("../util/isScheduler");
+var ArrayObservable_1 = require('../observable/ArrayObservable');
+var mergeAll_1 = require('./mergeAll');
+var isScheduler_1 = require('../util/isScheduler');
 /**
  * Creates an output Observable which concurrently emits all values from every
  * given input Observable.
@@ -52,7 +51,7 @@ var isScheduler_1 = require("../util/isScheduler");
 function merge() {
     var observables = [];
     for (var _i = 0; _i < arguments.length; _i++) {
-        observables[_i] = arguments[_i];
+        observables[_i - 0] = arguments[_i];
     }
     observables.unshift(this);
     return mergeStatic.apply(this, observables);
@@ -108,7 +107,7 @@ exports.merge = merge;
 function mergeStatic() {
     var observables = [];
     for (var _i = 0; _i < arguments.length; _i++) {
-        observables[_i] = arguments[_i];
+        observables[_i - 0] = arguments[_i];
     }
     var concurrent = Number.POSITIVE_INFINITY;
     var scheduler = null;

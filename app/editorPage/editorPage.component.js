@@ -67,7 +67,6 @@ var EditorPageComponent = (function () {
     };
     EditorPageComponent.prototype.publishArticle = function (currentArticle) {
         currentArticle.published = true;
-        // this.addArticle(currentArticle);
         this.add(currentArticle);
     };
     EditorPageComponent.prototype.delete = function (article) {

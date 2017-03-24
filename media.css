@@ -30,7 +30,8 @@
     }
 
     /*whole news*/
-    .form-divider, .news-main-content, .lg-news-aside-info, .editor-main-content, .editor-aside-block, .preview-img-lg {
+    asidenews,.form-divider, .news-main-content,
+    .lg-news-aside-info, .editor-main-content, .editor-aside-block, .preview-img-lg {
         width: 100%;
     }
 

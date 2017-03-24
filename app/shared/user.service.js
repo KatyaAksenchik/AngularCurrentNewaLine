@@ -64,7 +64,7 @@ var UserService = (function () {
         return JSON.parse(localStorage.getItem('ActiveUser'));
     };
     UserService.prototype.clearStorage = function () {
-        localStorage.setItem('ActiveUser', JSON.stringify({ login: "" }));
+        localStorage.setItem('ActiveUser', JSON.stringify([{ login: "" }]));
     };
     UserService.prototype.displayEditButtons = function (currentArticle) {
         var user = this.checkActiveUser()[0];

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class MainPageComponent implements OnInit{
 
     articles;
-    
+
     constructor(private route: Router, private articleService: ArticleService, private userService: UserService){
         this.articles = [];
     };

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var InMemoryDataService = (function () {
     function InMemoryDataService() {
     }
@@ -61,6 +62,51 @@ var InMemoryDataService = (function () {
                 authorName: "Илья Иванов",
                 publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
                 authorLogin: "ivanov",
+                published: true
+            },
+            {
+                id: 5,
+                articleName: "Маленькая новость",
+                imgUrl: "images/weather.jpg",
+                tag: {
+                    name: "Общество",
+                    tag: "society"
+                },
+                previewText: "бла-бла",
+                articleText: "\u0411\u043B\u0430-\u0431\u043B\u0430",
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
+                published: true
+            },
+            {
+                id: 6,
+                articleName: "Дональд Трамп вступил в должность 45-го президента США",
+                imgUrl: "images/trump.jpg",
+                tag: {
+                    name: "Политика",
+                    tag: "politics"
+                },
+                previewText: "бла-бла",
+                articleText: "\u0411\u043B\u0430-\u0431\u043B\u0430",
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
+                published: true
+            },
+            {
+                id: 7,
+                articleName: "Индия измерит Эверест после землетрясения в Непале",
+                imgUrl: "images/everest.jpg",
+                tag: {
+                    name: "Общество",
+                    tag: "society"
+                },
+                previewText: "бла-бла",
+                articleText: "\u0411\u043B\u0430-\u0431\u043B\u0430",
+                authorName: "Яна Петриченко",
+                publishDate: "Tue Mar 21 2017 00:00:00 GMT+0300 (Russia TZ 2 Standard Time)",
+                authorLogin: "simon",
                 published: true
             }
         ];

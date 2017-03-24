@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var zip_1 = require("./zip");
+var zip_1 = require('./zip');
 /**
  * @param project
  * @return {Observable<R>|WebSocketSubject<T>|Observable<T>}
