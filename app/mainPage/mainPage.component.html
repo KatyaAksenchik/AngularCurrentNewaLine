@@ -1,26 +1,31 @@
 <div class="wrapper">
-
+    <div class="sort-article-section">
+        <label>Cортировать статьи:</label>
+        <select name="tag" [(ngModel)]="choosedTag" #tag="ngModel" (change)="onChangeTag()">
+            <option [ngValue]="{tag: 'all'}">Все статьи</option>
+            <option [ngValue]="tag" *ngFor="let tag of tags">{{tag.name}}</option>
+        </select>
+    </div>
     <div class="tree-in-one-img-block">
-        <!--<div class="preview-img-block preview-img-lg" *ngFor="let firstArticle of (articles | published | slice:articles.length - 2)" >-->
-        <div class="preview-img-block preview-img-lg" *ngFor="let firstArticle of (articles | published | reverse | slice:0:1)" >
-        <a [routerLink]="['/newsPage', firstArticle.id]">
-                <div>
+        <div class="preview-img-block preview-img-lg"
+             *ngFor="let firstArticle of (articles | published | reverse | slice:0:1)">
+            <a [routerLink]="['/newsPage', firstArticle.id]">
+                <div class="bg-image-part">
                     <img src="{{firstArticle.imgUrl}}" alt="{{firstArticle.articleName}}" height="374" width="557">
                 </div>
                     <span class="prv-img-text-box">
-                        <span class="tag-box {{firstArticle.tag.tag}}-tag">{{firstArticle.tag.name}}</span><br>
-                        <span class="prv-img-header-text">{{firstArticle.articleName}}</span>
+                        <small class="tag-box {{firstArticle.tag.tag}}-tag">{{firstArticle.tag.name}}</small><br>
+                        <strong class="prv-img-header-text">{{firstArticle.articleName}}</strong>
                     </span>
             </a>
         </div>
         <div class="preview-sm-img-block">
-            <!--<div class="preview-img-block" *ngFor="let article of (articles | published | reverse| slice:articles.length - 4:articles.length - 2)">-->
             <div class="preview-img-block" *ngFor="let article of (articles | published | reverse | slice: 1:3) ">
                 <a [routerLink]="['/newsPage', article.id]">
                     <img src="{{article.imgUrl}}" alt="{{article.articleName}}">
                         <span class="prv-img-text-box">
-                            <span class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</span><br>
-                            <span class="prv-img-header-text">{{article.articleName}}</span>
+                            <small class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</small><br>
+                            <strong class="prv-img-header-text">{{article.articleName}}</strong>
                         </span>
                 </a>
             </div>
@@ -28,27 +33,26 @@
     </div>
 
 
-
     <!--<article class="news-box-large" *ngFor="let article of (articles | published | slice: 0: articles.length-4 | reverse )">-->
     <article class="news-box-large" *ngFor="let article of (articles | published | reverse | slice: 3 )">
-    <div>
-        <img src="{{article.imgUrl}}" alt="{{article.articleName}}" width="310" height="200">
-    </div>
-    <div class="article-content">
-        <h2>
-            {{article.articleName}}
-        </h2>
-        <p class="news-add-info">
-            <span>{{article.authorName}}</span>
-            <time>{{ article.publishDate | date:"dd/MM/yy" }}</time>
-            <span class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</span>
-        </p>
-        <p>
-            {{article.previewText}}
-        </p>
-        <p class="article-read-more">
-            <a [routerLink]="['/newsPage', article.id]">Читать дальше</a>
-        </p>
-    </div>
-</article>
+        <div>
+            <img src="{{article.imgUrl}}" alt="{{article.articleName}}" width="310" height="200">
+        </div>
+        <div class="article-content">
+            <h2>
+                {{article.articleName}}
+            </h2>
+            <p class="news-add-info">
+                <span>{{article.authorName}}</span>
+                <time>{{ article.publishDate | date:"dd/MM/yy" }}</time>
+                <span class="tag-box {{article.tag.tag}}-tag">{{article.tag.name}}</span>
+            </p>
+            <p>
+                {{article.previewText}}
+            </p>
+            <p class="article-read-more">
+                <a [routerLink]="['/newsPage', article.id]">Читать дальше</a>
+            </p>
+        </div>
+    </article>
 </div>

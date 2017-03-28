@@ -8,18 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/catch');
-require('rxjs/add/observable/throw');
-var article_1 = require('./article');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/observable/throw");
+var article_1 = require("./article");
 var ArticleService = (function () {
     function ArticleService(http) {
         this.http = http;
         this.apiUrl = 'api/articles';
         this.id = 8;
+        this.localStorageId = 0;
     }
     ArticleService.prototype.getArticles = function () {
         return this.http.get(this.apiUrl)
@@ -60,20 +62,32 @@ var ArticleService = (function () {
         return Observable_1.Observable.throw(error.message || error);
     };
     ArticleService.prototype.setTemporaryArticle = function (currentArticle) {
-        currentArticle.id = 0;
-        localStorage.setItem('PreviewPage', JSON.stringify(currentArticle));
+        var existingEntries = JSON.parse(sessionStorage.getItem('PreviewPage'));
+        if (existingEntries == null) {
+            existingEntries = [];
+        }
+        sessionStorage.setItem("entry", JSON.stringify(currentArticle));
+        existingEntries.push(currentArticle);
+        sessionStorage.setItem("PreviewPage", JSON.stringify(existingEntries));
     };
-    ArticleService.prototype.getTemporaryArticle = function () {
-        return JSON.parse(localStorage.getItem('PreviewPage'));
+    ArticleService.prototype.getTemporaryArticle = function (id) {
+        var existingEntries = JSON.parse(sessionStorage.getItem('PreviewPage'));
+        var searchItem;
+        existingEntries.forEach(function (item) {
+            if (item.id == id) {
+                searchItem = item;
+            }
+        });
+        return searchItem;
     };
     ArticleService.prototype.clearTemporaryArticle = function () {
-        localStorage.setItem('PreviewPage', JSON.stringify({}));
+        sessionStorage.setItem('PreviewPage', JSON.stringify([]));
     };
-    ArticleService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], ArticleService);
     return ArticleService;
 }());
+ArticleService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], ArticleService);
 exports.ArticleService = ArticleService;
 //# sourceMappingURL=article.service.js.map

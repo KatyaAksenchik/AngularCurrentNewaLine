@@ -22,6 +22,7 @@ export class EditorPageComponent implements OnInit {
     editState:string;
     id:number;
 
+
     constructor(private route:ActivatedRoute, private router:Router, private articleService:ArticleService, private  userService:UserService) {
         this.articles = [];
     };
@@ -32,13 +33,13 @@ export class EditorPageComponent implements OnInit {
         this.route.params
             .map(params => params['id'])
             .switchMap(id => {
-                if (isNaN(id) == false) {
-                    if (id !== "0") {
+                if (id) {
+                    if (isFinite(id)) {
                         this.editState = "Редактирование новости";
                         return this.articleService.getArticle(id);
                     }
                     else {
-                        return Observable.of(this.articleService.getTemporaryArticle());
+                        return Observable.of(this.articleService.getTemporaryArticle(id.match(/\d+$/)[0]));
                     }
                 } else {
                     return Observable.of(this.currentArticle);
@@ -111,8 +112,10 @@ export class EditorPageComponent implements OnInit {
     }
 
     previewPage(currentArticle) {
+        currentArticle.id = this.articleService.localStorageId;
         this.articleService.setTemporaryArticle(currentArticle);
-        this.router.navigate(['/newsPage', 0]);
+        this.router.navigate(['/newsPage', 'storage/'+currentArticle.id]);
+        this.articleService.localStorageId++;
     }
 
     onChange(val) {

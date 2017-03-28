@@ -77,11 +77,14 @@ export class UserService {
 
     displayEditButtons(currentArticle) {
         let user = this.checkActiveUser()[0];
-        if (user.login == "") {
-            return false;
-        } else if (user.login == currentArticle.authorLogin) {
-            return true;
-        } else return false;
+        // if (user.login == "") {
+        //     return false;
+        // } else if (user.login == currentArticle.authorLogin) {
+        //     return true;
+        // } else return false;
+        //
+        
+        return user.login == currentArticle.authorLogin;
     }
 
     private emitLoginChange = new Subject();

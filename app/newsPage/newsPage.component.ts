@@ -27,16 +27,16 @@ export class NewsPageComponent implements OnInit {
     }
 
     ngOnInit():void {
-        this.article = new Article(null, "", "", "", "", "","", "", "");
+        this.article = new Article(null, "", "", "", "", "", "", "", "");
 
         this.route.params
             .map(params => params['id'])
             .switchMap(id => {
                 this.id = id;
-                if (id !== "0") {
+                if (isFinite(id)) {
                     return this.articleService.getArticle(id);
                 } else {
-                    return Observable.of(this.articleService.getTemporaryArticle());
+                    return Observable.of(this.articleService.getTemporaryArticle(id.match(/\d+$/)[0]));
                 }
             })
             .subscribe(article => {
@@ -47,18 +47,24 @@ export class NewsPageComponent implements OnInit {
 
     deleteArticle(article) {
         this.router.navigate(['/mainPage']);
-        if(this.id!=="0"){
+        if (isFinite(id)) {
             this.articleService.deleteArticle(article).subscribe(res => {
                 article = null;
             });
         } else {
             this.articleService.clearTemporaryArticle();
         }
-        
+
     }
 
     directToEdit() {
-        this.router.navigate(['/editorPage', this.article.id]);
+        let id;
+        if (isFinite(id)) {
+            id = this.article.id;
+        } else {
+            id = this.id;
+        }
+        this.router.navigate(['/editorPage', id]);
     }
 
 }

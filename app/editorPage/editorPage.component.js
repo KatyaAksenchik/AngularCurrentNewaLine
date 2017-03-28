@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var router_2 = require('@angular/router');
-var article_service_1 = require('../shared/article.service');
-var user_service_1 = require('../shared/user.service');
-var article_1 = require('../shared/article');
-var extra_data_1 = require('../shared/extra.data');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var router_2 = require("@angular/router");
+var article_service_1 = require("../shared/article.service");
+var user_service_1 = require("../shared/user.service");
+var article_1 = require("../shared/article");
+var extra_data_1 = require("../shared/extra.data");
 var EditorPageComponent = (function () {
     function EditorPageComponent(route, router, articleService, userService) {
         this.route = route;
@@ -31,13 +32,13 @@ var EditorPageComponent = (function () {
         this.route.params
             .map(function (params) { return params['id']; })
             .switchMap(function (id) {
-            if (isNaN(id) == false) {
-                if (id !== "0") {
+            if (id) {
+                if (isFinite(id)) {
                     _this.editState = "Редактирование новости";
                     return _this.articleService.getArticle(id);
                 }
                 else {
-                    return Observable.of(_this.articleService.getTemporaryArticle());
+                    return Observable.of(_this.articleService.getTemporaryArticle(id.match(/\d+$/)[0]));
                 }
             }
             else {
@@ -103,21 +104,23 @@ var EditorPageComponent = (function () {
         this.router.navigate(['/newsPage', article.id]);
     };
     EditorPageComponent.prototype.previewPage = function (currentArticle) {
+        currentArticle.id = this.articleService.localStorageId;
         this.articleService.setTemporaryArticle(currentArticle);
-        this.router.navigate(['/newsPage', 0]);
+        this.router.navigate(['/newsPage', 'storage/' + currentArticle.id]);
+        this.articleService.localStorageId++;
     };
     EditorPageComponent.prototype.onChange = function (val) {
         this.currentArticle.tag = JSON.parse(val);
         this.selectedDevice = JSON.parse(val);
     };
-    EditorPageComponent = __decorate([
-        core_1.Component({
-            selector: 'editorPage',
-            templateUrl: './app/editorPage/editorPage.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
-    ], EditorPageComponent);
     return EditorPageComponent;
 }());
+EditorPageComponent = __decorate([
+    core_1.Component({
+        selector: 'editorPage',
+        templateUrl: './app/editorPage/editorPage.component.html'
+    }),
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_2.Router, article_service_1.ArticleService, user_service_1.UserService])
+], EditorPageComponent);
 exports.EditorPageComponent = EditorPageComponent;
 //# sourceMappingURL=editorPage.component.js.map

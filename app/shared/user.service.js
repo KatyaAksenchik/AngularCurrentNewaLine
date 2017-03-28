@@ -68,14 +68,13 @@ var UserService = (function () {
     };
     UserService.prototype.displayEditButtons = function (currentArticle) {
         var user = this.checkActiveUser()[0];
-        if (user.login == "") {
-            return false;
-        }
-        else if (user.login == currentArticle.authorLogin) {
-            return true;
-        }
-        else
-            return false;
+        // if (user.login == "") {
+        //     return false;
+        // } else if (user.login == currentArticle.authorLogin) {
+        //     return true;
+        // } else return false;
+        //
+        return user.login == currentArticle.authorLogin;
     };
     UserService.prototype.emitChange = function () {
         this.emitLoginChange.next();

@@ -13,6 +13,8 @@ export class ArticleService {
 
     private apiUrl = 'api/articles';
     id = 8;
+    localStorageId = 0;
+
 
     constructor(private http:Http) {
     }
@@ -72,16 +74,30 @@ export class ArticleService {
     }
 
     setTemporaryArticle(currentArticle) {
-        currentArticle.id = 0;
-        localStorage.setItem('PreviewPage', JSON.stringify(currentArticle));
+        let existingEntries = JSON.parse(sessionStorage.getItem('PreviewPage'));
+
+        if (existingEntries == null) {
+            existingEntries = [];
+        }
+        sessionStorage.setItem("entry", JSON.stringify(currentArticle));
+        existingEntries.push(currentArticle);
+        sessionStorage.setItem("PreviewPage", JSON.stringify(existingEntries));
     }
 
-    getTemporaryArticle() {
-        return JSON.parse(localStorage.getItem('PreviewPage'));
+    getTemporaryArticle(id) {
+        let existingEntries=JSON.parse(sessionStorage.getItem('PreviewPage'));
+        let searchItem;
+        existingEntries.forEach((item)=>{
+            if(item.id == id) {
+                searchItem = item;
+            }
+        });
+        return searchItem;
+
     }
 
     clearTemporaryArticle() {
-        localStorage.setItem('PreviewPage', JSON.stringify({}));
+        sessionStorage.setItem('PreviewPage', JSON.stringify([]));
     }
 }
 

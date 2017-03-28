@@ -32,11 +32,11 @@ var NewsPageComponent = (function () {
             .map(function (params) { return params['id']; })
             .switchMap(function (id) {
             _this.id = id;
-            if (id !== "0") {
+            if (isFinite(id)) {
                 return _this.articleService.getArticle(id);
             }
             else {
-                return Observable.of(_this.articleService.getTemporaryArticle());
+                return Observable.of(_this.articleService.getTemporaryArticle(id.match(/\d+$/)[0]));
             }
         })
             .subscribe(function (article) {
@@ -46,7 +46,7 @@ var NewsPageComponent = (function () {
     };
     NewsPageComponent.prototype.deleteArticle = function (article) {
         this.router.navigate(['/mainPage']);
-        if (this.id !== "0") {
+        if (isFinite(id)) {
             this.articleService.deleteArticle(article).subscribe(function (res) {
                 article = null;
             });
@@ -56,7 +56,14 @@ var NewsPageComponent = (function () {
         }
     };
     NewsPageComponent.prototype.directToEdit = function () {
-        this.router.navigate(['/editorPage', this.article.id]);
+        var id;
+        if (isFinite(id)) {
+            id = this.article.id;
+        }
+        else {
+            id = this.id;
+        }
+        this.router.navigate(['/editorPage', id]);
     };
     return NewsPageComponent;
 }());

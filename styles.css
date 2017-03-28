@@ -1,48 +1,5 @@
 /* This is our stylesheet */
 /*form styles*/
-
-.ng-invalid:not(form)  {
-    border-bottom: 3px solid #ec3f35;
-}
-
-.ng-valid[required], .ng-valid.required  {
-    border-bottom: 3px solid #0fa92e;
-}
-
-.log-in-form .ng-valid[required], .log-in-form .ng-valid.required{
-    border-bottom: initial;
-}
-.log-in-form .ng-invalid:not(form)  {
-    border-bottom: initial;
-}
-
-.text-bold{
-    font-weight: 600;
-}
-.warning-message{
-    padding: 4px;
-    text-align: center;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: white;
-    border-radius: 3px;
-    font-size: 14px;
-}
-
-.warning-style{
-    font-size: 14px;
-    color: red;
-}
-/*.error{*/
-    /*border-bottom: 3px solid #ec3f35 !important;*/
-/*}*/
-/*.ok{*/
-    /*border-bottom: 3px solid #0fa92e !important;*/
-/*}*/
-
-.log-in-button{
-    cursor: pointer;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -62,6 +19,40 @@ h2 {
 
 h2, h3, label {
     color: #4d114d;
+}
+
+.ng-invalid:not(form) {
+    border-bottom: 3px solid #ec3f35;
+}
+
+.ng-valid[required], .ng-valid.required {
+    border-bottom: 3px solid #0fa92e;
+}
+
+.log-in-form .ng-valid[required], .log-in-form .ng-valid.required {
+    border-bottom: initial;
+}
+
+.log-in-form .ng-invalid:not(form) {
+    border-bottom: initial;
+}
+
+.text-bold {
+    font-weight: 600;
+}
+
+.warning-message {
+    padding: 4px;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.warning-style {
+    font-size: 14px;
+    color: red;
 }
 
 .text-center {
@@ -144,6 +135,10 @@ footer .wrapper {
     border-bottom: solid 1px purple;
 }
 
+.log-in-button {
+    cursor: pointer;
+}
+
 .editor-mode-btn {
     margin-right: 15px;
     text-decoration: none;
@@ -164,10 +159,10 @@ footer .wrapper {
     font-weight: 500;
 }
 
-/*.news-box-large img{*/
-/*width: 310px;*/
-/*height: 200px;*/
-/*}*/
+.bg-image-part {
+    height: 100%;
+}
+
 .article-content {
     font-size: 15px;
     padding-left: 10px;
@@ -237,6 +232,18 @@ footer .wrapper {
 .first-news-box-margin {
     margin-right: 15px;
 }
+.sort-article-section{
+    padding: 15px 20px 0px;
+    text-align: center;
+}
+.sort-article-section label{
+    padding-right: 20px;
+}
+.sort-article-section select{
+    width: 255px;
+    height: 27px;
+    padding: 5px;
+}
 
 /*news-page*/
 
@@ -261,8 +268,6 @@ footer .wrapper {
     text-align: justify;
 }
 
-
-
 .news-lg-add-info {
     text-align: right;
 }
@@ -271,9 +276,11 @@ footer .wrapper {
     margin-right: 7px;
     font-size: 14px;
 }
-asidenews{
+
+asidenews {
     width: 30%;
 }
+
 .lg-news-aside-info {
     padding: 20px 15px;
 }
@@ -299,9 +306,7 @@ asidenews{
     border-right: solid 1px rgba(103, 21, 103, 0.8)
 }
 
-/*.registered-form input[type="text"],.registered-form textarea, .registered-form select*/
-/*.registration-field-box input[type="text"] {*/
-input[type="text"], textarea, select, input[type="password"], input[type="email"], input[type="date"] {
+input[type="text"], textarea, .registered-form select, input[type="password"], input[type="email"], input[type="date"] {
     display: block;
     width: 100%;
     height: 34px;
@@ -314,7 +319,8 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     resize: none;
     height: 250px;
 }
-.registered-form .preview-textarea{
+
+.registered-form .preview-textarea {
     height: 140px;
 }
 
@@ -401,7 +407,7 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     border-radius: 5px;
     color: white;
     background: purple;
-    box-shadow: 0px 2px 0px #4f274f;
+    box-shadow: 0 2px 0 #4f274f;
     border: solid 1px black;
     text-transform: uppercase;
     text-align: center;
@@ -417,10 +423,12 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     background: #8f378f;
     cursor: pointer;
 }
-.btn-styles:disabled{
+
+.btn-styles:disabled {
     background: #8f628e;
     cursor: auto;
 }
+
 .registr-btn-style {
     width: 80%;
     margin: 10px 0;
@@ -447,7 +455,8 @@ input[type="text"], textarea, select, input[type="password"], input[type="email"
     width: 65%;
 
 }
-.registration-field-box input[type="date"]{
+
+.registration-field-box input[type="date"] {
     color: #a9a9a9;
 }
 

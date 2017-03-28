@@ -12,14 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var user_service_1 = require("./shared/user.service");
+var article_service_1 = require("./shared/article.service");
 var AppComponent = (function () {
-    function AppComponent(router, userService) {
+    function AppComponent(router, userService, articleService) {
         this.router = router;
         this.userService = userService;
+        this.articleService = articleService;
         this.title = "Current news line";
     }
     ;
     AppComponent.prototype.ngOnInit = function () {
+        this.articleService.clearTemporaryArticle();
         if (this.userService.checkActiveUser()) {
             return;
         }
@@ -34,7 +37,7 @@ AppComponent = __decorate([
         selector: "app",
         templateUrl: './app/app.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService])
+    __metadata("design:paramtypes", [router_1.Router, user_service_1.UserService, article_service_1.ArticleService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
